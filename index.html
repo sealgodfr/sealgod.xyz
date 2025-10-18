@@ -43,95 +43,58 @@
   </div>
   <footer>&copy; <span id="yr"></span> sealgod.xyz</footer>
   <script>
-    (function setAbsoluteBase() {
-      try {
-        const base = document.getElementById('site-base');
-        base.setAttribute('href', location.origin + '/');
-      } catch (e) {
-        console.warn('Could not set base href:', e);
-      }
+    (function setAbsoluteBase(){
+      try{document.getElementById('site-base').setAttribute('href', location.origin + '/')}catch(e){}
     })();
+
     const frame = document.getElementById('gameFrame');
-    function loadGame(url) {
-      if (!url) return;
-      if (frame.src === url || frame.src.endsWith(url)) {
-        frame.style.display = (frame.style.display === 'none' || frame.style.display === '') ? 'block' : 'none';
+    function loadGame(url){
+      if(!url)return;
+      if(frame.src===url||frame.src.endsWith(url)){
+        frame.style.display=(frame.style.display==='none'||frame.style.display==='')?'block':'none';
         return;
       }
-      frame.src = url;
-      frame.style.display = 'block';
+      frame.src=url;
+      frame.style.display='block';
     }
-    (function titleCycler() {
-      const CHARSET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}<>?/|~';
-      function randomChar() {
-        return CHARSET.charAt(Math.floor(Math.random() * CHARSET.length));
-      }
-      function randomTitle(len = 12) {
-        let s = '';
-        for (let i = 0; i < len; i++) s += randomChar();
-        return s;
-      }
-      const TITLE_LENGTH = 240;
-      const TITLE_INTERVAL = 5;
-      document.title = randomTitle(TITLE_LENGTH);
-      setInterval(() => {
-        document.title = randomTitle(TITLE_LENGTH);
-      }, TITLE_INTERVAL);
+
+    (function titleSpinner(){
+      const SPINNER_FRAMES=['/','|','-','\\'];
+      let frameIndex=0;
+      setInterval(()=>{
+        document.title=SPINNER_FRAMES[frameIndex]+' sealgod.xyz';
+        frameIndex=(frameIndex+1)%SPINNER_FRAMES.length;
+      },100);
     })();
-    (function obfuscatePathOnce() {
-      const PATH_CHARS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-      function randChar() { return PATH_CHARS.charAt(Math.floor(Math.random() * PATH_CHARS.length)); }
-      function randSegment(len) {
-        let s = '';
-        for (let i = 0; i < len; i++) s += randChar();
-        return s;
-      }
-      function buildRandomPath(totalLength = 80, minSeg = 5, maxSeg = 18) {
-        let parts = [];
-        let remaining = totalLength;
-        while (remaining > 0) {
-          const segLen = Math.min(remaining, Math.floor(Math.random() * (maxSeg - minSeg + 1)) + minSeg);
-          parts.push(randSegment(segLen));
-          remaining -= segLen;
-        }
-        return '/' + parts.join('/');
-      }
-      function safeReplacePath(newPath) {
-        try {
-          const newUrl = newPath + (location.search || '') + (location.hash || '');
-          history.replaceState(null, '', newUrl);
-        } catch (err) {
-          console.warn('Obfuscation failed:', err);
-        }
-      }
-      window.addEventListener('load', () => {
-        const obfPath = buildRandomPath(240, 6, 16);
-        safeReplacePath(obfPath);
-      });
+
+    (function obfuscatePathOnce(){
+      const PATH_CHARS='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}<>?/|~';
+      function randChar(){return PATH_CHARS.charAt(Math.floor(Math.random()*PATH_CHARS.length))}
+      function randSegment(len){let s='';for(let i=0;i<len;i++)s+=randChar();return s}
+      function buildRandomPath(totalLength=160,minSeg=6,maxSeg=16){let parts=[];let remaining=totalLength;while(remaining>0){const segLen=Math.min(remaining,Math.floor(Math.random()*(maxSeg-minSeg+1))+minSeg);parts.push(randSegment(segLen));remaining-=segLen}return '/'+parts.join('/')}
+      function safeReplacePath(newPath){try{const newUrl=newPath+(location.search||'')+(location.hash||'');history.replaceState(null,'',newUrl)}catch(err){}}
+      window.addEventListener('load',()=>{safeReplacePath(buildRandomPath())});
     })();
-    (function snow() {
-      function create() {
-        const el = document.createElement('div');
-        el.className = 'snowflake';
-        el.textContent = '❄';
-        const size = (Math.random() * 1.5 + 0.5).toFixed(2);
-        el.style.fontSize = size + 'em';
-        el.style.left = Math.random() * window.innerWidth + 'px';
-        const dur = Math.random() * 5000 + 5000;
-        el.style.transition = `transform ${dur}ms linear, opacity ${dur}ms linear`;
+
+    (function snow(){
+      function create(){
+        const el=document.createElement('div');
+        el.className='snowflake';
+        el.textContent='❄';
+        const size=(Math.random()*1.5+0.5).toFixed(2);
+        el.style.fontSize=size+'em';
+        el.style.left=Math.random()*window.innerWidth+'px';
+        const dur=Math.random()*5000+5000;
+        el.style.transition=`transform ${dur}ms linear, opacity ${dur}ms linear`;
         document.body.appendChild(el);
-        const driftX = (Math.random() * 200 - 100).toFixed(2);
-        requestAnimationFrame(() => {
-          el.style.transform = `translate(${driftX}px, ${window.innerHeight + 60}px)`;
-          el.style.opacity = '0';
-        });
-        setTimeout(() => el.remove(), dur + 200);
+        const driftX=(Math.random()*200-100).toFixed(2);
+        requestAnimationFrame(()=>{el.style.transform=`translate(${driftX}px, ${window.innerHeight+60}px)`;el.style.opacity='0'});
+        setTimeout(()=>el.remove(),dur+200);
       }
-      setInterval(create, 300);
+      setInterval(create,300);
     })();
-    (function setYear() {
-      document.getElementById('yr').textContent = new Date().getFullYear();
-    })();
+
+    (function setYear(){document.getElementById('yr').textContent=new Date().getFullYear()})();
   </script>
 </body>
 </html>
