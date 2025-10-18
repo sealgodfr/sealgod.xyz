@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><3 sealgod.xyz</title>
+<title><3</title>
 <style>
   html, body {
     height: 100%;
@@ -89,34 +89,35 @@
     border-radius: 20px;
     box-shadow: 0 0 20px rgba(0,0,0,0.2);
     background: white;
+    display: none;
   }
 </style>
 </head>
 <body>
-
 <div class="label">sealgod.xyz</div>
-
 <div class="button-container">
   <button onclick="loadGame('https://duckmath.github.io/')">DUCKMATH</button>
   <button onclick="loadGame('https://geometry-lessons.github.io/')">GEOMETRY-LESSONS</button>
   <button onclick="loadGame('https://geometryspot.com/activities/')">GEOMETRY SPOT</button>
   <button onclick="loadGame('https://d3rtzzzsiu7gdr.cloudfront.net/')">HYPACKEL</button>
-  <button onclick="loadGame('https://playhop.com/')">PLAYHOP</button>
-  <button onclick="loadGame('https://now.gg/')">NOW.GG</button>
-  <button onclick="loadGame('https://thewebsitesbridge.com/')">NOW.GG #2</button>
+  <button onclick="window.open('https://playhop.com/', '_blank')">PLAYHOP</button>
+  <button onclick="window.open('https://now.gg/', '_blank')">NOW.GG</button>
+  <button onclick="window.open('https://thewebsitesbridge.com/', '_blank')">NOW.GG #2</button>
 </div>
-
 <div class="box">
   <iframe id="gameFrame" src=""></iframe>
 </div>
-
 <script>
+const frame = document.getElementById('gameFrame');
+let currentURL = null;
 function loadGame(url) {
-  const frame = document.getElementById('gameFrame');
+  if (frame.src === url || frame.src.endsWith(url)) {
+    frame.style.display = frame.style.display === 'none' ? 'block' : 'none';
+    return;
+  }
   frame.src = url;
+  frame.style.display = 'block';
 }
-
-// --- Snow animation ---
 function createSnowflake() {
   const snowflake = document.createElement('div');
   snowflake.classList.add('snowflake');
@@ -127,8 +128,6 @@ function createSnowflake() {
   snowflake.style.left = x + 'px';
   snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
   document.body.appendChild(snowflake);
-
-  // Random drifting motion
   let drift = Math.random() * 100 - 50;
   snowflake.animate([
     { transform: `translate(${drift}px, 100vh)` }
@@ -137,11 +136,9 @@ function createSnowflake() {
     easing: 'linear',
     fill: 'forwards'
   });
-
   setTimeout(() => snowflake.remove(), 10000);
 }
 setInterval(createSnowflake, 200);
 </script>
-
 </body>
 </html>
