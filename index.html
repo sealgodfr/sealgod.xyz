@@ -76,7 +76,7 @@
     height: 100%;
     border: none;
     border-radius: 20px;
-    display: none; /* hidden initially */
+    display: none;
   }
 </style>
 </head>
@@ -116,7 +116,6 @@ function createSnowflake() {
 }
 setInterval(createSnowflake, 200);
 
-// Load HTML5 Geometry Dash in iframe
 const gameLink = document.getElementById('loadGame');
 const gameFrame = document.getElementById('gameFrame');
 
