@@ -35,45 +35,46 @@
         opacity: 0.9;
       }
       100% {
-        transform: translate(var(--x-drift, 0vw), 110vh) rotate(360deg);
+        transform: translate(var(--x-drift, 0px), 110vh) rotate(360deg);
         opacity: 0.3;
       }
     }
 
-.box {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 50px;
-  width: 1000px;
-  height: 700px;
-  position: relative;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  backdrop-filter: blur(15px);
-  
-  /* Multi-layered glow */
-  box-shadow: 
-    0 0 20px rgba(255, 255, 255, 0.4),
-    0 0 40px rgba(255, 255, 255, 0.3),
-    0 0 80px rgba(255, 182, 212, 0.25),
-    0 0 120px rgba(255, 182, 212, 0.2),
-    0 0 160px rgba(255, 182, 212, 0.15);
-}
+    .box {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 50px;
+      width: 1000px;
+      height: 700px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      backdrop-filter: blur(15px);
 
-/* Optional: soft glowing aura around the box */
-.box::before {
-  content: "";
-  position: absolute;
-  top: -50px;
-  left: -50px;
-  width: calc(100% + 100px);
-  height: calc(100% + 100px);
-  border-radius: 50px;
-  background: radial-gradient(circle, rgba(255,182,212,0.3) 0%, rgba(255,182,212,0) 70%);
-  z-index: -1;
-}
+      /* Even glow around the entire box */
+      box-shadow:
+        0 0 20px rgba(255, 255, 255, 0.4),
+        0 0 40px rgba(255, 255, 255, 0.3),
+        0 0 80px rgba(255, 182, 212, 0.25),
+        0 0 120px rgba(255, 182, 212, 0.2),
+        0 0 160px rgba(255, 182, 212, 0.15),
+        0 0 200px rgba(255, 182, 212, 0.1);
+    }
+
+    /* Soft glowing aura around the box */
+    .box::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50px;
+      box-shadow: 0 0 60px rgba(255,182,212,0.5);
+      z-index: -1;
+    }
 
     h1 {
       font-size: 40px;
@@ -94,11 +95,15 @@
       snowflake.classList.add('snowflake');
       snowflake.textContent = '❄';
 
-      // Spawn anywhere horizontally
-      snowflake.style.left = Math.random() * 100 + 'vw';
+      const box = document.querySelector('.box');
+      const boxRect = box.getBoundingClientRect();
 
-      // Spawn above the viewport at random vertical position
-      snowflake.style.top = Math.random() * -20 + 'vh';
+      // Spawn horizontally over the box only
+      const left = Math.random() * boxRect.width + boxRect.left;
+      snowflake.style.left = left + 'px';
+
+      // Spawn slightly above the box
+      snowflake.style.top = boxRect.top - 20 + 'px';
 
       // Random size
       snowflake.style.fontSize = (Math.random() * 2 + 0.5) + 'em';
@@ -107,8 +112,8 @@
       const duration = Math.random() * 5 + 5; // 5–10s
       snowflake.style.animationDuration = duration + 's';
 
-      // Random horizontal drift for natural float
-      const drift = (Math.random() * 10 - 5) + 'vw'; // -5vw to +5vw
+      // Random horizontal drift
+      const drift = (Math.random() * 10 - 5) + 'px';
       snowflake.style.setProperty('--x-drift', drift);
 
       document.body.appendChild(snowflake);
@@ -120,7 +125,7 @@
     }
 
     // Spawn snowflakes continuously
-    setInterval(createSnowflake, 100); // faster for more coverage
+    setInterval(createSnowflake, 100);
   </script>
 </body>
 </html>
