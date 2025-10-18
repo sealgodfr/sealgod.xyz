@@ -3,22 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Snow</title>
+  <title><3</title>
   <style>
     html, body {
       height: 100%;
       margin: 0;
       padding: 0;
       overflow: hidden;
-      background: #f2b8d4; /* soft pink background */
+      background: #f2b8d4;
       position: relative;
       font-family: 'Inter', system-ui, sans-serif;
     }
-
-    /* Snowflakes */
     .snowflake {
       position: absolute;
-      top: -10px; /* start slightly above the screen */
+      top: -10px;
       color: white;
       font-size: 1em;
       opacity: 0.8;
@@ -27,7 +25,6 @@
       animation-timing-function: linear;
       animation-iteration-count: 1;
     }
-
     @keyframes fall {
       0% {
         transform: translateY(0);
@@ -38,7 +35,6 @@
         opacity: 0.3;
       }
     }
-
     .box {
       background: rgba(150, 150, 150, 0.25);
       border-radius: 35px;
@@ -57,32 +53,18 @@
 </head>
 <body>
   <div class="box"></div>
-
   <script>
     function createSnowflake() {
       const snowflake = document.createElement('div');
       snowflake.classList.add('snowflake');
       snowflake.textContent = '❄';
-
-      // Spawn anywhere across the screen width
       snowflake.style.left = Math.random() * window.innerWidth + 'px';
-
-      // Size and opacity
       snowflake.style.fontSize = (Math.random() * 1.5 + 0.5) + 'em';
       snowflake.style.opacity = Math.random() * 0.5 + 0.5;
-
-      // Random animation duration
       snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
-
-      // Remove snowflake after animation
-      snowflake.addEventListener('animationend', () => {
-        snowflake.remove();
-      });
-
+      snowflake.addEventListener('animationend', () => { snowflake.remove(); });
       document.body.appendChild(snowflake);
     }
-
-    // Continuously spawn snowflakes
     setInterval(createSnowflake, 200);
   </script>
 </body>
