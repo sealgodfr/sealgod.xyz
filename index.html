@@ -18,11 +18,25 @@
     /* Snowflakes */
     .snowflake {
       position: absolute;
-      top: 0;
+      top: -10px; /* start slightly above the screen */
       color: white;
       font-size: 1em;
       opacity: 0.8;
       pointer-events: none;
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: 1;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(110vh);
+        opacity: 0.3;
+      }
     }
 
     .box {
@@ -50,44 +64,25 @@
       snowflake.classList.add('snowflake');
       snowflake.textContent = '❄';
 
-      // Decide if snowflake comes from left or right
-      const fromLeft = Math.random() < 0.5;
-
-      // Starting positions: left/right edge, random vertical
-      snowflake.style.left = fromLeft ? '-2vw' : '102vw';
-      snowflake.style.top = Math.random() * 100 + 'vh';
+      // Spawn anywhere across the screen width
+      snowflake.style.left = Math.random() * window.innerWidth + 'px';
 
       // Size and opacity
       snowflake.style.fontSize = (Math.random() * 1.5 + 0.5) + 'em';
       snowflake.style.opacity = Math.random() * 0.5 + 0.5;
 
-      // Animation duration and direction
-      const duration = Math.random() * 5 + 5; // 5-10s
-      const endX = fromLeft ? window.innerWidth + 20 : -20; // offscreen
-      const endY = Math.random() * window.innerHeight;
+      // Random animation duration
+      snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
 
-      // Animate with JS
-      let startTime = null;
-      function animate(time) {
-        if (!startTime) startTime = time;
-        const progress = (time - startTime) / (duration * 1000);
-        if (progress < 1) {
-          const x = fromLeft 
-            ? -20 + progress * (window.innerWidth + 40) 
-            : window.innerWidth + 20 - progress * (window.innerWidth + 40);
-          const y = parseFloat(snowflake.style.top) + progress * (endY - parseFloat(snowflake.style.top));
-          snowflake.style.transform = `translate(${x}px, ${y}px) rotate(${progress * 360}deg)`;
-          requestAnimationFrame(animate);
-        } else {
-          snowflake.remove();
-        }
-      }
+      // Remove snowflake after animation
+      snowflake.addEventListener('animationend', () => {
+        snowflake.remove();
+      });
 
       document.body.appendChild(snowflake);
-      requestAnimationFrame(animate);
     }
 
-    // Spawn snowflakes continuously
+    // Continuously spawn snowflakes
     setInterval(createSnowflake, 200);
   </script>
 </body>
