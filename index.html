@@ -1,12 +1,241 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Website</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Project — Clean Repo Landing</title>
+  <meta name="description" content="Clean, responsive single-file landing page for your GitHub repository." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0f1724;
+      --card: #0b1220;
+      --muted: #9aa4b2;
+      --accent: #6ee7b7;
+      --glass: rgba(255,255,255,0.03);
+      --shadow: 0 8px 30px rgba(2,6,23,0.6);
+      --radius: 14px;
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,#071022 0%, var(--bg) 100%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:32px;
+    }
+    .container{max-width:1100px;margin:0 auto}
+
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#1f2937,#0ea5a9);display:flex;align-items:center;justify-content:center;font-weight:700;color:white;box-shadow:var(--shadow)}
+    nav{display:flex;gap:10px;align-items:center}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:10px;cursor:pointer;color:inherit}
+    .cta{background:linear-gradient(90deg,#06b6d4,#6ee7b7);color:#042022;border:none;padding:10px 14px;border-radius:10px;font-weight:600}
+
+    .hero{display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:center;margin-bottom:32px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.03)}
+    h1{font-size:28px;margin:0 0 8px}
+    p.lead{color:var(--muted);margin:0 0 18px}
+
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+    .feature{padding:14px;border-radius:12px;background:var(--glass);border:1px solid rgba(255,255,255,0.02)}
+    .feature h4{margin:6px 0 0;font-size:14px}
+    .muted{color:var(--muted);font-size:14px}
+
+    pre.cmd{background:#06111a;padding:12px;border-radius:10px;overflow:auto;border:1px solid rgba(255,255,255,0.03);font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace;font-size:13px}
+
+    .right-col{display:flex;flex-direction:column;gap:12px}
+    .badge{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);font-weight:600}
+
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+    .card.small{padding:16px}
+
+    footer{margin-top:36px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* responsive */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr;}
+      .features{grid-template-columns:repeat(2,1fr)}
+      body{padding:20px}
+    }
+    @media (max-width:520px){
+      .features{grid-template-columns:1fr}
+    }
+
+    /* light theme support (optional) */
+    :root.light{--bg:#f7fafc;--card:#ffffff;--muted:#596379;--accent:#0ea5a9;--glass:rgba(3,7,18,0.03);color-scheme:light;color:#0b1220}
+    .theme-toggle{display:inline-flex;align-items:center;gap:8px}
+  </style>
 </head>
 <body>
-  <h1>hey guys im js testing sm</h1>
-  <p>my rel gthb ws</p>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">PR</div>
+        <div>
+          <div style="font-weight:700">Project Name</div>
+          <div class="muted" style="font-size:13px">A short, sharp repo landing page</div>
+        </div>
+      </div>
+      <nav>
+        <button class="btn" onclick="scrollToSection('about')">About</button>
+        <button class="btn" onclick="scrollToSection('install')">Install</button>
+        <button class="btn" onclick="scrollToSection('contrib')">Contribute</button>
+        <div class="theme-toggle">
+          <button id="themeBtn" class="btn" title="Toggle theme">🌗</button>
+          <a class="cta" href="#" onclick="copyRepoUrl(event)">Clone</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="card">
+          <h1>Clean, minimal repo landing page</h1>
+          <p class="lead">A single-file HTML template designed for GitHub repositories and GitHub Pages. Lightweight, responsive, and easy to customize.</p>
+
+          <div class="features">
+            <div class="feature">
+              <strong>✅ Easy setup</strong>
+              <div class="muted">Drop in to your repo and edit the content.</div>
+            </div>
+            <div class="feature">
+              <strong>⚡ Fast</strong>
+              <div class="muted">No frameworks — pure HTML/CSS/JS.</div>
+            </div>
+            <div class="feature">
+              <strong>🎨 Clean UI</strong>
+              <div class="muted">Dark-first design with an optional light theme.</div>
+            </div>
+          </div>
+
+          <div style="margin-top:18px">
+            <div class="muted">Install</div>
+            <pre class="cmd">$ curl -o index.html https://raw.githubusercontent.com/your/repo/main/github-repo-landing.html
+$ git add index.html &amp;&amp; git commit -m "Add repo landing" &amp;&amp; git push</pre>
+          </div>
+        </div>
+
+        <aside class="right-col">
+          <div class="card small">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div class="badge">v1.0</div>
+                <div class="muted" style="margin-top:6px">Released Oct 2025</div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-weight:700">Star this repo</div>
+                <div class="muted" style="font-size:13px">Make it shine ✨</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card small">
+            <div style="font-weight:700;margin-bottom:8px">Quick commands</div>
+            <pre class="cmd"># Clone
+$ git clone https://github.com/your/repo.git
+
+# Serve locally
+$ npx http-server -c-1 .
+</pre>
+          </div>
+
+          <div class="card small">
+            <div style="font-weight:700;margin-bottom:8px">License</div>
+            <div class="muted">MIT — see LICENSE in repo</div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="about" class="card" style="margin-bottom:18px">
+        <h2 style="margin-top:0">About this template</h2>
+        <p class="muted">This file is intentionally intentionally framework-free so it’s easy to drop into any repository or GitHub Pages site. Customize colors, fonts, and content quickly — everything you need is in one file.</p>
+
+        <div class="grid">
+          <div class="card small">
+            <h4>Customizable</h4>
+            <div class="muted">Change the logo, update the copy, or add links to docs.</div>
+          </div>
+          <div class="card small">
+            <h4>Accessible</h4>
+            <div class="muted">Color contrast and semantic structure for screen readers.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="install" class="card" style="margin-bottom:18px">
+        <h2 style="margin-top:0">Install & Usage</h2>
+        <ol class="muted">
+          <li>Copy <code>github-repo-landing.html</code> into your repo as <code>index.html</code>.</li>
+          <li>Update the project name, logo, and links in the file.</li>
+          <li>Push to GitHub and enable GitHub Pages (if desired).</li>
+        </ol>
+
+        <div style="margin-top:12px">
+          <div style="font-weight:700">Example clone command</div>
+          <pre class="cmd">git clone https://github.com/your/repo.git
+cd repo
+# edit index.html
+</pre>
+        </div>
+      </section>
+
+      <section id="contrib" class="card">
+        <h2 style="margin-top:0">Contributing</h2>
+        <p class="muted">Contributions are welcome — open an issue or submit a pull request. Keep changes small and focused. Add examples and update the README when you add features.</p>
+
+        <div style="margin-top:12px">
+          <div style="font-weight:700">Suggested labels</div>
+          <div class="muted">bug · enhancement · docs · good-first-issue</div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Built with ❤️ — feel free to fork and adapt. · <span class="muted">Template • 2025</span>
+    </footer>
+  </div>
+
+  <script>
+    // Small helper interactions
+    function scrollToSection(id){
+      const el=document.getElementById(id);
+      if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
+    // Theme toggle: toggles the .light class on :root
+    const themeBtn=document.getElementById('themeBtn');
+    themeBtn.addEventListener('click',()=>{
+      const root=document.documentElement;
+      if(root.classList.contains('light')){
+        root.classList.remove('light');
+        localStorage.setItem('site-theme','dark');
+      } else {
+        root.classList.add('light');
+        localStorage.setItem('site-theme','light');
+      }
+    });
+    // apply saved theme
+    (function(){
+      const s=localStorage.getItem('site-theme');
+      if(s==='light') document.documentElement.classList.add('light');
+    })();
+
+    function copyRepoUrl(e){
+      e.preventDefault();
+      const url = window.location.href.includes('github.io') ? window.location.href : 'https://github.com/your/repo';
+      navigator.clipboard?.writeText(url).then(()=>{
+        alert('Repository URL copied to clipboard!');
+      },()=>{ window.prompt('Copy URL', url); });
+    }
+  </script>
 </body>
 </html>
