@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>&lt;3</title> <!-- Shows in browser tab -->
+  <title>&lt;3</title>
   <style>
     html, body {
       height: 100%;
       margin: 0;
       padding: 0;
       overflow: hidden;
-      background: #f2b8d4; /* dark pink background */
-      font-family: 'Inter', system-ui, sans-serif;
+      background: #f2b8d4; /* soft pink background */
       display: flex;
       justify-content: center;
       align-items: center;
+      font-family: 'Inter', system-ui, sans-serif;
       position: relative;
     }
 
@@ -40,58 +40,56 @@
       }
     }
 
-    /* Glowy frosted box */
     .box {
-      background: rgba(255, 255, 255, 0.15); /* translucent white */
-      border-radius: 50px;
-      width: 1000px;  /* bigger width */
-      height: 700px;  /* bigger height */
-      box-shadow: 0 0 60px rgba(255, 255, 255, 0.4), 
-                  0 0 100px rgba(255, 255, 255, 0.2); /* glow effect */
+      background: rgba(150, 150, 150, 0.25);
+      border-radius: 35px;
+      width: 900px;   /* bigger width */
+      height: 600px;  /* bigger height */
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.25);
+      text-align: center;
       border: 1px solid rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(15px); /* frosted glass */
+      z-index: 2;
+      backdrop-filter: blur(10px);
       display: flex;
-      justify-content: center; /* center vertically */
-      align-items: center;     /* center horizontally */
-      padding: 20px;
-      position: relative;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding-top: 40px;
     }
 
     h1 {
-      font-size: 40px;
-      color: #c2185b; /* dark pink text */
+      font-size: 40px;      /* smaller text */
+      color: #b23a5b;       /* dark pink color */
       margin: 0;
-      visibility: hidden; /* hidden text inside box */
     }
   </style>
 </head>
 <body>
   <div class="box">
-    <h1>&lt;3</h1> <!-- hidden, page title shows <3 -->
+    <h1>&lt;3</h1>
   </div>
 
+  <!-- Snowflake generator -->
   <script>
     function createSnowflake() {
       const snowflake = document.createElement('div');
       snowflake.classList.add('snowflake');
       snowflake.textContent = '❄';
-
-      // Random horizontal spawn position
-      snowflake.style.left = Math.random() * 100 + 'vw';
-      snowflake.style.fontSize = (Math.random() * 2 + 0.5) + 'em';
+      snowflake.style.left = Math.random() * 100 + 'vw'; // spawn anywhere horizontally
+      snowflake.style.fontSize = (Math.random() * 1.5 + 0.5) + 'em';
       snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
-      snowflake.style.animationDelay = '0s';
+      snowflake.style.opacity = Math.random() * 0.5 + 0.5;
 
       document.body.appendChild(snowflake);
 
-      // Remove snowflake after falling
+      // Remove snowflake after falling to prevent memory buildup
       snowflake.addEventListener('animationend', () => {
         snowflake.remove();
       });
     }
 
-    // Spawn snowflakes continuously
-    setInterval(createSnowflake, 200); // every 0.2s
+    // Continuously spawn snowflakes
+    setInterval(createSnowflake, 200); // spawn a new snowflake every 0.2s
   </script>
 </body>
 </html>
