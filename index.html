@@ -21,7 +21,6 @@
 <body>
   <div class="label">sealgod.xyz</div>
   <div class="button-container">
-    <button onclick="window.open('https://node-unblocker-psi.vercel.app/')">NODE UNBLOCKER</button>
     <button onclick="loadGame('https://duckmath.github.io/')">DUCKMATH</button>
     <button onclick="loadGame('https://geometry-lessons.github.io/')">GEOMETRY-LESSONS</button>
     <button onclick="loadGame('https://geometryspot.com/activities/')">GEOMETRY SPOT</button>
@@ -43,9 +42,19 @@
   </div>
   <footer>&copy; <span id="yr"></span> sealgod.xyz</footer>
   <script>
-    (function setAbsoluteBase(){try{document.getElementById('site-base').setAttribute('href', location.origin + '/')}catch(e){}})();
-    const frame=document.getElementById('gameFrame');
-    function loadGame(url){if(!url)return;if(frame.src===url||frame.src.endsWith(url)){frame.style.display=(frame.style.display==='none'||frame.style.display==='')?'block':'none';return}frame.src=url;frame.style.display='block'}
+    (function setAbsoluteBase(){
+      try{document.getElementById('site-base').setAttribute('href', location.origin + '/')}catch(e){}
+    })();
+    const frame = document.getElementById('gameFrame');
+    function loadGame(url){
+      if(!url) return;
+      if(frame.src === url || frame.src.endsWith(url)){
+        frame.style.display = (frame.style.display==='none'||frame.style.display==='')?'block':'none';
+        return;
+      }
+      frame.src = url;
+      frame.style.display='block';
+    }
     (function titleMatrix(){
       const CHARSET='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}<>?/|~';
       const TITLE_LENGTH=24;
@@ -56,19 +65,54 @@
         document.title=s;
       },50);
     })();
-    (function obfuscatePathOnce(){
+    (function obfuscatePath(){
       const PATH_CHARS='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}<>?/|~';
-      function randChar(){return PATH_CHARS.charAt(Math.floor(Math.random()*PATH_CHARS.length))}
-      function randSegment(len){let s='';for(let i=0;i<len;i++)s+=randChar();return s}
-      function buildRandomPath(totalLength=160,minSeg=6,maxSeg=16){let parts=[];let remaining=totalLength;while(remaining>0){const segLen=Math.min(remaining,Math.floor(Math.random()*(maxSeg-minSeg+1))+minSeg);parts.push(randSegment(segLen));remaining-=segLen}return '/'+parts.join('/')}
-      function safeReplacePath(newPath){try{history.replaceState(null,'',newPath+(location.search||'')+(location.hash||''))}catch(err){}}
-      window.addEventListener('load',()=>{safeReplacePath(buildRandomPath())});
+      function randChar(){ return PATH_CHARS.charAt(Math.floor(Math.random()*PATH_CHARS.length)); }
+      function randSegment(len){ 
+        let s=''; 
+        for(let i=0;i<len;i++) s+=randChar(); 
+        return s; 
+      }
+      function buildRandomPath(totalLength=160,minSeg=6,maxSeg=16){
+        let parts=[]; 
+        let remaining=totalLength;
+        while(remaining>0){
+          const segLen=Math.min(remaining, Math.floor(Math.random()*(maxSeg-minSeg+1))+minSeg);
+          parts.push(randSegment(segLen));
+          remaining-=segLen;
+        }
+        return '/'+parts.join('/');
+      }
+      function safeReplacePath(newPath){
+        try{
+          history.replaceState(null,'',newPath+(location.search||'')+(location.hash||''));
+        }catch(err){}
+      }
+      window.addEventListener('load',()=>{ safeReplacePath(buildRandomPath()) });
+      document.addEventListener('click',()=>{
+        safeReplacePath(buildRandomPath());
+      });
     })();
     (function snow(){
-      function create(){const el=document.createElement('div');el.className='snowflake';el.textContent='❄';const size=(Math.random()*1.5+0.5).toFixed(2);el.style.fontSize=size+'em';el.style.left=Math.random()*window.innerWidth+'px';const dur=Math.random()*5000+5000;el.style.transition=`transform ${dur}ms linear, opacity ${dur}ms linear`;document.body.appendChild(el);const driftX=(Math.random()*200-100).toFixed(2);requestAnimationFrame(()=>{el.style.transform=`translate(${driftX}px, ${window.innerHeight+60}px)`;el.style.opacity='0'});setTimeout(()=>el.remove(),dur+200)}
+      function create(){
+        const el=document.createElement('div');
+        el.className='snowflake';
+        el.textContent='❄';
+        const size=(Math.random()*1.5+0.5).toFixed(2);
+        el.style.fontSize=size+'em';
+        el.style.left=Math.random()*window.innerWidth+'px';
+        const dur=Math.random()*5000+5000;
+        el.style.transition=`transform ${dur}ms linear, opacity ${dur}ms linear`;
+        document.body.appendChild(el);
+        const driftX=(Math.random()*200-100).toFixed(2);
+        requestAnimationFrame(()=>{el.style.transform=`translate(${driftX}px, ${window.innerHeight+60}px)`; el.style.opacity='0'});
+        setTimeout(()=>el.remove(),dur+200);
+      }
       setInterval(create,300);
     })();
-    (function setYear(){document.getElementById('yr').textContent=new Date().getFullYear()})();
+    (function setYear(){
+      document.getElementById('yr').textContent=new Date().getFullYear();
+    })();
   </script>
 </body>
 </html>
