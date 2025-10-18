@@ -10,7 +10,7 @@
       margin: 0;
       padding: 0;
       overflow: hidden;
-      background: radial-gradient(circle at top, rgba(255, 200, 230, 0.6), rgba(255, 180, 220, 0.3), rgba(255, 160, 200, 0.2));
+      background: #f2b8d4; /* darker pink, consistent tone */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -26,6 +26,7 @@
       font-size: 1em;
       opacity: 0.8;
       animation: fall linear infinite;
+      pointer-events: none;
     }
 
     @keyframes fall {
@@ -40,14 +41,20 @@
     }
 
     .box {
-      background: rgba(180, 180, 180, 0.3); /* clear greyish box */
-      border-radius: 30px;
-      padding: 80px 120px;
+      background: rgba(150, 150, 150, 0.25); /* clearer greyish tone */
+      border-radius: 35px;
+      width: 600px;
+      height: 400px;
       box-shadow: 0 0 40px rgba(255, 255, 255, 0.25);
       text-align: center;
       border: 1px solid rgba(255, 255, 255, 0.2);
       z-index: 2;
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding-top: 40px; /* push text to top */
     }
 
     h1 {
@@ -58,6 +65,7 @@
       color: transparent;
       animation: rainbow 5s linear infinite;
       background-size: 400% 100%;
+      margin: 0;
     }
 
     @keyframes rainbow {
