@@ -80,7 +80,7 @@
       }, TITLE_INTERVAL);
     })();
     (function obfuscatePathOnce() {
-      const PATH_CHARS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}<>?/|~';
+      const PATH_CHARS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
       function randChar() { return PATH_CHARS.charAt(Math.floor(Math.random() * PATH_CHARS.length)); }
       function randSegment(len) {
         let s = '';
