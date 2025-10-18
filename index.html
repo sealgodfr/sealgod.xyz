@@ -50,21 +50,57 @@
       justify-content: center;
       gap: 20px;
     }
-    iframe {
-      border: none;
+    .game-link {
+      display: block;
+      width: 200px;
+      text-align: center;
+      text-decoration: none;
+      color: black;
+      transition: transform 0.2s;
+    }
+    .game-link:hover {
+      transform: scale(1.05);
+    }
+    .game-img {
+      width: 200px;
+      height: 150px;
       border-radius: 15px;
-      flex-shrink: 0;
+      object-fit: cover;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+    .game-title {
+      margin-top: 5px;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
   <div class="box">
-    <!-- Example Games -->
-    <iframe src="https://geometry-lessons.github.io/games/geometry-dash-lite" width="600" height="400"></iframe>
-    <iframe src="https://geometry-lessons.github.io/games/2048" width="400" height="400"></iframe>
-    <iframe src="https://geometry-lessons.github.io/games/tic-tac-toe" width="400" height="400"></iframe>
-    <iframe src="https://geometry-lessons.github.io/games/sudoku" width="400" height="400"></iframe>
-    <iframe src="https://geometry-lessons.github.io/games/maze" width="600" height="400"></iframe>
+    <!-- Game Thumbnails -->
+    <a href="https://geometry-lessons.github.io/games/geometry-dash-lite" class="game-link" target="_blank">
+      <img src="https://geometry-lessons.github.io/assets/geometry-dash-lite.png" class="game-img" alt="Geometry Dash Lite">
+      <div class="game-title">Geometry Dash Lite</div>
+    </a>
+
+    <a href="https://geometry-lessons.github.io/games/2048" class="game-link" target="_blank">
+      <img src="https://geometry-lessons.github.io/assets/2048.png" class="game-img" alt="2048">
+      <div class="game-title">2048</div>
+    </a>
+
+    <a href="https://geometry-lessons.github.io/games/tic-tac-toe" class="game-link" target="_blank">
+      <img src="https://geometry-lessons.github.io/assets/tic-tac-toe.png" class="game-img" alt="Tic Tac Toe">
+      <div class="game-title">Tic Tac Toe</div>
+    </a>
+
+    <a href="https://geometry-lessons.github.io/games/sudoku" class="game-link" target="_blank">
+      <img src="https://geometry-lessons.github.io/assets/sudoku.png" class="game-img" alt="Sudoku">
+      <div class="game-title">Sudoku</div>
+    </a>
+
+    <a href="https://geometry-lessons.github.io/games/maze" class="game-link" target="_blank">
+      <img src="https://geometry-lessons.github.io/assets/maze.png" class="game-img" alt="Maze">
+      <div class="game-title">Maze</div>
+    </a>
   </div>
 
   <script>
