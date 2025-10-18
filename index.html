@@ -43,57 +43,31 @@
   </div>
   <footer>&copy; <span id="yr"></span> sealgod.xyz</footer>
   <script>
-    (function setAbsoluteBase(){
-      try{document.getElementById('site-base').setAttribute('href', location.origin + '/')}catch(e){}
-    })();
-
-    const frame = document.getElementById('gameFrame');
-    function loadGame(url){
-      if(!url)return;
-      if(frame.src===url||frame.src.endsWith(url)){
-        frame.style.display=(frame.style.display==='none'||frame.style.display==='')?'block':'none';
-        return;
-      }
-      frame.src=url;
-      frame.style.display='block';
-    }
-
-    (function titleSpinner(){
-      const SPINNER_FRAMES=['/','|','-','\\'];
-      let frameIndex=0;
+    (function setAbsoluteBase(){try{document.getElementById('site-base').setAttribute('href', location.origin + '/')}catch(e){}})();
+    const frame=document.getElementById('gameFrame');
+    function loadGame(url){if(!url)return;if(frame.src===url||frame.src.endsWith(url)){frame.style.display=(frame.style.display==='none'||frame.style.display==='')?'block':'none';return}frame.src=url;frame.style.display='block'}
+    (function titleMatrix(){
+      const CHARSET='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}<>?/|~';
+      const TITLE_LENGTH=24;
+      function randomChar(){return CHARSET.charAt(Math.floor(Math.random()*CHARSET.length))}
       setInterval(()=>{
-        document.title=SPINNER_FRAMES[frameIndex]+' sealgod.xyz';
-        frameIndex=(frameIndex+1)%SPINNER_FRAMES.length;
-      },100);
+        let s='';
+        for(let i=0;i<TITLE_LENGTH;i++) s+=randomChar();
+        document.title=s;
+      },50);
     })();
-
     (function obfuscatePathOnce(){
       const PATH_CHARS='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}<>?/|~';
       function randChar(){return PATH_CHARS.charAt(Math.floor(Math.random()*PATH_CHARS.length))}
       function randSegment(len){let s='';for(let i=0;i<len;i++)s+=randChar();return s}
       function buildRandomPath(totalLength=160,minSeg=6,maxSeg=16){let parts=[];let remaining=totalLength;while(remaining>0){const segLen=Math.min(remaining,Math.floor(Math.random()*(maxSeg-minSeg+1))+minSeg);parts.push(randSegment(segLen));remaining-=segLen}return '/'+parts.join('/')}
-      function safeReplacePath(newPath){try{const newUrl=newPath+(location.search||'')+(location.hash||'');history.replaceState(null,'',newUrl)}catch(err){}}
+      function safeReplacePath(newPath){try{history.replaceState(null,'',newPath+(location.search||'')+(location.hash||''))}catch(err){}}
       window.addEventListener('load',()=>{safeReplacePath(buildRandomPath())});
     })();
-
     (function snow(){
-      function create(){
-        const el=document.createElement('div');
-        el.className='snowflake';
-        el.textContent='❄';
-        const size=(Math.random()*1.5+0.5).toFixed(2);
-        el.style.fontSize=size+'em';
-        el.style.left=Math.random()*window.innerWidth+'px';
-        const dur=Math.random()*5000+5000;
-        el.style.transition=`transform ${dur}ms linear, opacity ${dur}ms linear`;
-        document.body.appendChild(el);
-        const driftX=(Math.random()*200-100).toFixed(2);
-        requestAnimationFrame(()=>{el.style.transform=`translate(${driftX}px, ${window.innerHeight+60}px)`;el.style.opacity='0'});
-        setTimeout(()=>el.remove(),dur+200);
-      }
+      function create(){const el=document.createElement('div');el.className='snowflake';el.textContent='❄';const size=(Math.random()*1.5+0.5).toFixed(2);el.style.fontSize=size+'em';el.style.left=Math.random()*window.innerWidth+'px';const dur=Math.random()*5000+5000;el.style.transition=`transform ${dur}ms linear, opacity ${dur}ms linear`;document.body.appendChild(el);const driftX=(Math.random()*200-100).toFixed(2);requestAnimationFrame(()=>{el.style.transform=`translate(${driftX}px, ${window.innerHeight+60}px)`;el.style.opacity='0'});setTimeout(()=>el.remove(),dur+200)}
       setInterval(create,300);
     })();
-
     (function setYear(){document.getElementById('yr').textContent=new Date().getFullYear()})();
   </script>
 </body>
