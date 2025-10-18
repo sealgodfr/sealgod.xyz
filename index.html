@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>&lt;3</title>
+  <title>&lt;3</title> <!-- This is what shows in the browser tab -->
   <style>
     html, body {
       height: 100%;
@@ -12,6 +12,9 @@
       overflow: hidden;
       background: #f2b8d4; /* dark pink background */
       font-family: 'Inter', system-ui, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       position: relative;
     }
 
@@ -38,32 +41,32 @@
     }
 
     .box {
-      background: rgba(150, 150, 150, 0.25);
+      background: rgba(255, 255, 255, 0.25); /* white but translucent */
       border-radius: 35px;
-      width: 900px; /* bigger width */
-      height: 600px; /* bigger height */
+      width: 900px;
+      height: 600px;
       box-shadow: 0 0 40px rgba(255, 255, 255, 0.25);
       text-align: center;
       border: 1px solid rgba(255, 255, 255, 0.2);
-      z-index: 2;
       backdrop-filter: blur(10px);
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      padding-top: 20px; /* smaller padding */
+      justify-content: center; /* vertically centered */
+      align-items: center;     /* horizontally centered */
+      padding: 20px;
     }
 
     h1 {
-      font-size: 40px; /* smaller text */
+      font-size: 40px;
       color: #c2185b; /* dark pink text */
       margin: 0;
+      visibility: hidden; /* hide text inside box */
     }
   </style>
 </head>
 <body>
   <div class="box">
-    <h1>&lt;3</h1>
+    <h1>&lt;3</h1> <!-- hidden inside box, browser tab shows the title -->
   </div>
 
   <script>
