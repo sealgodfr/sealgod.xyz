@@ -1,158 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><3</title>
-<style>
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background: #f2b8d4;
-    font-family: 'Inter', system-ui, sans-serif;
-  }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>sealgod.xyz</title>
 
-  .label {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    font-size: 2em;
-    font-weight: bold;
-    color: rgba(0,0,0,0.8);
-    text-shadow:
-      0 0 5px rgba(255,255,255,0.5),
-      0 0 10px rgba(255,255,255,0.3),
-      0 0 15px rgba(255,255,255,0.2);
-    backdrop-filter: blur(2px);
-  }
-  .button-container {
-    position: absolute;
-    top: 70px;
-    left: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    z-index: 10;
-  }
-  .button-container button {
-    padding: 10px 15px;
-    font-size: 1em;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    background: rgba(255,255,255,0.3);
-    color: black;
-    backdrop-filter: blur(5px);
-    transition: all 0.2s ease;
-  }
-  .button-container button:hover {
-    background: rgba(255,255,255,0.6);
-    transform: scale(1.05);
-  }
-  .snowflake {
-    position: absolute;
-    top: -10px;
-    color: white;
-    font-size: 1em;
-    opacity: 0.8;
-    pointer-events: none;
-    animation: fall linear forwards;
-  }
-  @keyframes fall {
-    0% { transform: translateY(0); opacity: 0.9; }
-    90% { opacity: 0.5; }
-    100% { transform: translateY(110vh); opacity: 0; }
-  }
-  .box {
-    position: absolute;
-    top: 130px;
-    left: 0;
-    width: 100%;
-    height: calc(100% - 140px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  iframe {
-    width: 90%;
-    height: 90%;
-    border: none;
-    border-radius: 20px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    background: white;
-    display: none;
-  }
-</style>
+  <!-- Ensure relative resources resolve to the site root even after we change the visible path -->
+  <!-- We programmatically set the absolute base href on load to be extra-safe -->
+  <base id="site-base" href="/" />
+
+  <style>
+    /* Basic layout */
+    html,body{height:100%;margin:0;padding:0;overflow:hidden;background:#f2b8d4;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial}
+    .label{position:absolute;top:20px;left:20px;font-size:2em;font-weight:700;color:rgba(0,0,0,.8);text-shadow:0 0 5px rgba(255,255,255,.5);backdrop-filter:blur(2px)}
+    .button-container{position:absolute;top:70px;left:20px;display:flex;flex-wrap:wrap;gap:10px;z-index:10}
+    .button-container button{padding:10px 15px;border-radius:10px;border:none;cursor:pointer;background:rgba(255,255,255,.32);backdrop-filter:blur(5px);transition:all .16s ease}
+    .button-container button:hover{transform:scale(1.05);background:rgba(255,255,255,.6)}
+    .box{position:absolute;top:130px;left:0;width:100%;height:calc(100% - 140px);display:flex;justify-content:center;align-items:center}
+    iframe{width:90%;height:90%;border-radius:20px;border:none;box-shadow:0 0 20px rgba(0,0,0,.2);display:none;background:#fff}
+    .snowflake{position:absolute;top:-10px;color:white;pointer-events:none;opacity:.8}
+    @media (max-width:768px){.label{font-size:1.5em}.button-container{top:60px;left:10px}iframe{width:95%;height:85%}}
+    footer{position:absolute;bottom:10px;width:100%;text-align:center;color:rgba(0,0,0,.6);font-size:.9em}
+  </style>
 </head>
+
 <body>
-<div class="label">sealgod.xyz</div>
-<div class="button-container">
-  <button onclick="openInNewTab('https://node-unblocker-psi.vercel.app/')">NODE UNBLOCKER</button>
-  <button onclick="loadGame('https://duckmath.github.io/')">DUCKMATH</button>
-  <button onclick="loadGame('https://geometry-lessons.github.io/')">GEOMETRY-LESSONS</button>
-  <button onclick="loadGame('https://geometryspot.com/activities/')">GEOMETRY SPOT</button>
-  <button onclick="loadGame('https://d3rtzzzsiu7gdr.cloudfront.net/')">HYPACKEL</button>
-  <button onclick="loadGame('https://slope-slope.github.io/games/')">SLOPE-SLOPE</button>
-  <button onclick="loadGame('https://152.53.136.204.ip.addr.tools/games/')">152.53.136.204</button>
-  <button onclick="loadGame('https://algebra.icu/gxmes')">ALGEBRA GXMES</button>
-  <button onclick="loadGame('https://glacierarcade.xyz/gxmes')">GLACIER GXMES</button>
-  <button onclick="loadGame('https://8765hfjdf.vercel.app/unblockedgame76.html')">76 UNBLOCKED GAMES</button>
-  <button onclick="loadGame('https://55gms.com/g')">EXPLOIT CORNER</button>
-  <button onclick="loadGame('https://play.alphatron.games/')">ALPHATRON GAMES</button>
-  <button onclick="openInNewTab('https://sites.google.com/view/classroom6x/')">CLASSROOM 6X</button>
-  <button onclick="openInNewTab('https://playhop.com/')">PLAYHOP</button>
-  <button onclick="openInNewTab('https://now.gg/')">NOW.GG</button>
-  <button onclick="openInNewTab('https://thewebsitesbridge.com/')">NOW.GG #2</button>
-  <button onclick="openInNewTab('https://github.com/sealgodfr')">GITHUB</button>
-</div>
-<div class="box">
-  <iframe id="gameFrame" src=""></iframe>
-</div>
-<script>
-const frame = document.getElementById('gameFrame');
+  <div class="label">sealgod.xyz</div>
 
-// Load game in iframe via about:blank first
-function loadGame(url) {
-  frame.style.display = 'block';
-  frame.src = 'about:blank'; // show blank first
-  setTimeout(() => {
-    frame.src = url; // then load real site
-  }, 50);
-}
+  <div class="button-container">
+    <!-- Use absolute URLs so iframe/window.open won't be affected by path changes -->
+    <button onclick="window.open('https://node-unblocker-psi.vercel.app/')">NODE UNBLOCKER</button>
+    <button onclick="loadGame('https://duckmath.github.io/')">DUCKMATH</button>
+    <button onclick="loadGame('https://geometry-lessons.github.io/')">GEOMETRY-LESSONS</button>
+    <button onclick="loadGame('https://geometryspot.com/activities/')">GEOMETRY SPOT</button>
+    <button onclick="loadGame('https://d3rtzzzsiu7gdr.cloudfront.net/')">HYPACKEL</button>
+    <button onclick="loadGame('https://slope-slope.github.io/games/')">SLOPE-SLOPE</button>
+    <button onclick="loadGame('https://152.53.136.204.ip.addr.tools/games/')">152.53.136.204</button>
+    <button onclick="loadGame('https://algebra.icu/gxmes')">ALGEBRA GXMES</button>
+    <button onclick="loadGame('https://glacierarcade.xyz/gxmes')">GLACIER GXMES</button>
+    <button onclick="loadGame('https://8765hfjdf.vercel.app/unblockedgame76.html')">76 UNBLOCKED GAMES</button>
+    <button onclick="loadGame('https://55gms.com/g')">EXPLOIT CORNER</button>
+    <button onclick="loadGame('https://play.alphatron.games/')">ALPHATRON GAMES</button>
+    <button onclick="window.open('https://sites.google.com/view/classroom6x/')">CLASSROOM 6X</button>
+    <button onclick="window.open('https://playhop.com/', '_blank')">PLAYHOP</button>
+    <button onclick="window.open('https://now.gg/', '_blank')">NOW.GG</button>
+    <button onclick="window.open('https://thewebsitesbridge.com/', '_blank')">NOW.GG #2</button>
+  </div>
 
-// Open any link in a new tab via about:blank first
-function openInNewTab(url) {
-  const w = window.open('about:blank'); // blank tab first
-  w.location.href = url; // then redirect
-}
+  <div class="box">
+    <iframe id="gameFrame" src=""></iframe>
+  </div>
 
-// Snowflake effect
-function createSnowflake() {
-  const snowflake = document.createElement('div');
-  snowflake.classList.add('snowflake');
-  snowflake.textContent = '❄';
-  let x = Math.random() * window.innerWidth;
-  const size = Math.random() * 1.5 + 0.5;
-  snowflake.style.fontSize = size + 'em';
-  snowflake.style.left = x + 'px';
-  snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
-  document.body.appendChild(snowflake);
-  let drift = Math.random() * 100 - 50;
-  snowflake.animate(
-      [
-          { transform: `translate(${drift}px, 100vh)` }
-      ],
-      {
-          duration: Math.random() * 5000 + 5000,
-          easing: 'linear',
-          fill: 'forwards'
+  <footer>&copy; <span id="yr"></span> sealgod.xyz</footer>
+
+  <script>
+    // --------------------------
+    // Utility: absolute base href
+    // --------------------------
+    // When we change visible path with history.replaceState, relative resource resolution can break.
+    // Make the <base> absolute (site root) so relative URLs still resolve reliably.
+    (function setAbsoluteBase() {
+      try {
+        const base = document.getElementById('site-base');
+        // Set base to origin root (e.g., https://username.github.io/)
+        base.setAttribute('href', location.origin + '/');
+      } catch (e) {
+        // ignore if something fails
+        console.warn('Could not set base href:', e);
       }
-  );
-  setTimeout(() => snowflake.remove(), 10000);
-}
-setInterval(createSnowflake, 200);
-</script>
+    })();
+
+    // --------------------------
+    // IFrame helper
+    // --------------------------
+    const frame = document.getElementById('gameFrame');
+    function loadGame(url) {
+      if (!url) return;
+      // Toggle visibility if same URL clicked repeatedly
+      if (frame.src === url || frame.src.endsWith(url)) {
+        frame.style.display = (frame.style.display === 'none' || frame.style.display === '') ? 'block' : 'none';
+        return;
+      }
+      frame.src = url;
+      frame.style.display = 'block';
+    }
+
+    // --------------------------
+    // Title cycling (random chars)
+    // --------------------------
+    (function titleCycler() {
+      const CHARSET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}<>?/|~';
+      function randomChar() {
+        return CHARSET.charAt(Math.floor(Math.random() * CHARSET.length));
+      }
+      function randomTitle(len = 12) {
+        let s = '';
+        for (let i = 0; i < len; i++) s += randomChar();
+        return s;
+      }
+
+      // Config: title length and speed (ms)
+      const TITLE_LENGTH = 14;     // how many characters in the title
+      const TITLE_INTERVAL = 200;  // ms between title updates
+
+      // Start quickly so the user sees it changed immediately
+      document.title = randomTitle(TITLE_LENGTH);
+      setInterval(() => {
+        document.title = randomTitle(TITLE_LENGTH);
+      }, TITLE_INTERVAL);
+    })();
+
+    // --------------------------
+    // URL path obfuscation (one-time)
+    // --------------------------
+    (function obfuscatePathOnce() {
+      // Allowed characters for obfuscated path
+      const PATH_CHARS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      function randChar() { return PATH_CHARS.charAt(Math.floor(Math.random() * PATH_CHARS.length)); }
+
+      // Single segment of given length
+      function randSegment(len) {
+        let s = '';
+        for (let i = 0; i < len; i++) s += randChar();
+        return s;
+      }
+
+      // Build nested-looking path while keeping totalLength approximately as requested.
+      function buildRandomPath(totalLength = 80, minSeg = 5, maxSeg = 18) {
+        let parts = [];
+        let remaining = totalLength;
+        while (remaining > 0) {
+          const segLen = Math.min(remaining, Math.floor(Math.random() * (maxSeg - minSeg + 1)) + minSeg);
+          parts.push(randSegment(segLen));
+          remaining -= segLen;
+        }
+        // Insert slashes between parts
+        return '/' + parts.join('/');
+      }
+
+      function safeReplacePath(newPath) {
+        try {
+          // Preserve existing search and hash if present
+          const newUrl = newPath + (location.search || '') + (location.hash || '');
+          // replaceState won't reload the page and doesn't create a new history entry
+          history.replaceState(null, '', newUrl);
+          // done
+        } catch (err) {
+          console.warn('Obfuscation failed:', err);
+        }
+      }
+
+      // Run on load after a very short delay to ensure resources and base tag are set
+      window.addEventListener('load', () => {
+        // Build a path ~80 chars long (you can change the 80)
+        const obfPath = buildRandomPath(80, 6, 16);
+        safeReplacePath(obfPath);
+        // If you prefer hash-based obfuscation instead (safer for some static setups), you can do:
+        // location.hash = randSegment(48);
+      });
+
+      // Optional: if you want repeated obfuscation while user stays on site, uncomment below
+      // Be cautious: frequent changes may confuse users or analytics.
+      // const REOBF_INTERVAL_MS = 60_000; // every 60 seconds
+      // setInterval(() => safeReplacePath(buildRandomPath(80,6,16)), REOBF_INTERVAL_MS);
+    })();
+
+    // --------------------------
+    // Small snowflake visual (cosmetic)
+    // --------------------------
+    (function snow() {
+      function create() {
+        const el = document.createElement('div');
+        el.className = 'snowflake';
+        el.textContent = '❄';
+        const size = (Math.random() * 1.5 + 0.5).toFixed(2);
+        el.style.fontSize = size + 'em';
+        el.style.left = Math.random() * window.innerWidth + 'px';
+        const dur = Math.random() * 5000 + 5000;
+        el.style.transition = `transform ${dur}ms linear, opacity ${dur}ms linear`;
+        document.body.appendChild(el);
+        const driftX = (Math.random() * 200 - 100).toFixed(2);
+        // requestAnimationFrame to ensure transition applies
+        requestAnimationFrame(() => {
+          el.style.transform = `translate(${driftX}px, ${window.innerHeight + 60}px)`;
+          el.style.opacity = '0';
+        });
+        setTimeout(() => el.remove(), dur + 200);
+      }
+      // spawn gently
+      setInterval(create, 300);
+    })();
+
+    // --------------------------
+    // Footer year filler
+    // --------------------------
+    (function setYear() {
+      document.getElementById('yr').textContent = new Date().getFullYear();
+    })();
+  </script>
 </body>
 </html>
