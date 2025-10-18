@@ -4,8 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>sealgod.xyz</title>
+
+  <!-- Ensure relative resources resolve to the site root even after we change the visible path -->
+  <!-- We programmatically set the absolute base href on load to be extra-safe -->
   <base id="site-base" href="/" />
+
   <style>
+    /* Basic layout */
     html,body{height:100%;margin:0;padding:0;overflow:hidden;background:#f2b8d4;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial}
     .label{position:absolute;top:20px;left:20px;font-size:2em;font-weight:700;color:rgba(0,0,0,.8);text-shadow:0 0 5px rgba(255,255,255,.5);backdrop-filter:blur(2px)}
     .button-container{position:absolute;top:70px;left:20px;display:flex;flex-wrap:wrap;gap:10px;z-index:10}
@@ -18,8 +23,10 @@
     footer{position:absolute;bottom:10px;width:100%;text-align:center;color:rgba(0,0,0,.6);font-size:.9em}
   </style>
 </head>
+
 <body>
   <div class="label">sealgod.xyz</div>
+
   <div class="button-container">
     <button onclick="window.open('https://node-unblocker-psi.vercel.app/')">NODE UNBLOCKER/PROXY</button>
     <button onclick="loadGame('https://duckmath.github.io/')">DUCKMATH</button>
@@ -39,37 +46,157 @@
     <button onclick="window.open('https://now.gg/', '_blank')">NOW.GG</button>
     <button onclick="window.open('https://thewebsitesbridge.com/', '_blank')">NOW.GG #2</button>
   </div>
+
   <div class="box">
     <iframe id="gameFrame" src=""></iframe>
   </div>
+
   <footer>&copy; <span id="yr"></span> sealgod.xyz</footer>
+
   <script>
-    (function setAbsoluteBase(){try{document.getElementById('site-base').setAttribute('href', location.origin + '/')}catch(e){}})();
-    const frame=document.getElementById('gameFrame');
-    function loadGame(url){if(!url)return;if(frame.src===url||frame.src.endsWith(url)){frame.style.display=(frame.style.display==='none'||frame.style.display==='')?'block':'none';return}frame.src=url;frame.style.display='block'}
-    (function titleMatrix(){
-      const CHARSET='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}<>?/|~';
-      const TITLE_LENGTH=24;
-      function randomChar(){return CHARSET.charAt(Math.floor(Math.random()*CHARSET.length))}
-      setInterval(()=>{
-        let s='';
-        for(let i=0;i<TITLE_LENGTH;i++) s+=randomChar();
-        document.title=s;
-      },500);
+    // --------------------------
+    // Utility: absolute base href
+    // --------------------------
+    // When we change visible path with history.replaceState, relative resource resolution can break.
+    // Make the <base> absolute (site root) so relative URLs still resolve reliably.
+    (function setAbsoluteBase() {
+      try {
+        const base = document.getElementById('site-base');
+        // Set base to origin root (e.g., https://username.github.io/)
+        base.setAttribute('href', location.origin + '/');
+      } catch (e) {
+        // ignore if something fails
+        console.warn('Could not set base href:', e);
+      }
     })();
-    (function obfuscatePathOnce(){
-      const PATH_CHARS='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}<>?/|~';
-      function randChar(){return PATH_CHARS.charAt(Math.floor(Math.random()*PATH_CHARS.length))}
-      function randSegment(len){let s='';for(let i=0;i<len;i++)s+=randChar();return s}
-      function buildRandomPath(totalLength=160,minSeg=6,maxSeg=16){let parts=[];let remaining=totalLength;while(remaining>0){const segLen=Math.min(remaining,Math.floor(Math.random()*(maxSeg-minSeg+1))+minSeg);parts.push(randSegment(segLen));remaining-=segLen}return '/'+parts.join('/')}
-      function safeReplacePath(newPath){try{history.replaceState(null,'',newPath+(location.search||'')+(location.hash||''))}catch(err){}}
-      window.addEventListener('load',()=>{safeReplacePath(buildRandomPath())});
+
+    // --------------------------
+    // IFrame helper
+    // --------------------------
+    const frame = document.getElementById('gameFrame');
+    function loadGame(url) {
+      if (!url) return;
+      // Toggle visibility if same URL clicked repeatedly
+      if (frame.src === url || frame.src.endsWith(url)) {
+        frame.style.display = (frame.style.display === 'none' || frame.style.display === '') ? 'block' : 'none';
+        return;
+      }
+      frame.src = url;
+      frame.style.display = 'block';
+    }
+
+    // --------------------------
+    // Title cycling (random chars)
+    // --------------------------
+    (function titleCycler() {
+      const CHARSET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}<>?/|~';
+      function randomChar() {
+        return CHARSET.charAt(Math.floor(Math.random() * CHARSET.length));
+      }
+      function randomTitle(len = 12) {
+        let s = '';
+        for (let i = 0; i < len; i++) s += randomChar();
+        return s;
+      }
+
+      // Config: title length and speed (ms)
+      const TITLE_LENGTH = 14;     // how many characters in the title
+      const TITLE_INTERVAL = 200;  // ms between title updates
+
+      // Start quickly so the user sees it changed immediately
+      document.title = randomTitle(TITLE_LENGTH);
+      setInterval(() => {
+        document.title = randomTitle(TITLE_LENGTH);
+      }, TITLE_INTERVAL);
     })();
-    (function snow(){
-      function create(){const el=document.createElement('div');el.className='snowflake';el.textContent='❄';const size=(Math.random()*1.5+0.5).toFixed(2);el.style.fontSize=size+'em';el.style.left=Math.random()*window.innerWidth+'px';const dur=Math.random()*5000+5000;el.style.transition=`transform ${dur}ms linear, opacity ${dur}ms linear`;document.body.appendChild(el);const driftX=(Math.random()*200-100).toFixed(2);requestAnimationFrame(()=>{el.style.transform=`translate(${driftX}px, ${window.innerHeight+60}px)`;el.style.opacity='0'});setTimeout(()=>el.remove(),dur+200)}
-      setInterval(create, 200);
+
+    // --------------------------
+    // URL path obfuscation (one-time)
+    // --------------------------
+    (function obfuscatePathOnce() {
+      // Allowed characters for obfuscated path
+      const PATH_CHARS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      function randChar() { return PATH_CHARS.charAt(Math.floor(Math.random() * PATH_CHARS.length)); }
+
+      // Single segment of given length
+      function randSegment(len) {
+        let s = '';
+        for (let i = 0; i < len; i++) s += randChar();
+        return s;
+      }
+
+      // Build nested-looking path while keeping totalLength approximately as requested.
+      function buildRandomPath(totalLength = 80, minSeg = 5, maxSeg = 18) {
+        let parts = [];
+        let remaining = totalLength;
+        while (remaining > 0) {
+          const segLen = Math.min(remaining, Math.floor(Math.random() * (maxSeg - minSeg + 1)) + minSeg);
+          parts.push(randSegment(segLen));
+          remaining -= segLen;
+        }
+        // Insert slashes between parts
+        return '/' + parts.join('/');
+      }
+
+      function safeReplacePath(newPath) {
+        try {
+          // Preserve existing search and hash if present
+          const newUrl = newPath + (location.search || '') + (location.hash || '');
+          // replaceState won't reload the page and doesn't create a new history entry
+          history.replaceState(null, '', newUrl);
+          // done
+        } catch (err) {
+          console.warn('Obfuscation failed:', err);
+        }
+      }
+
+      // Run on load after a very short delay to ensure resources and base tag are set
+      window.addEventListener('load', () => {
+        // Build a path ~80 chars long (you can change the 80)
+        const obfPath = buildRandomPath(80, 6, 16);
+        safeReplacePath(obfPath);
+        // If you prefer hash-based obfuscation instead (safer for some static setups), you can do:
+        // location.hash = randSegment(48);
+      });
+
+      // Optional: if you want repeated obfuscation while user stays on site, uncomment below
+      // Be cautious: frequent changes may confuse users or analytics.
+      // const REOBF_INTERVAL_MS = 60_000; // every 60 seconds
+      // setInterval(() => safeReplacePath(buildRandomPath(80,6,16)), REOBF_INTERVAL_MS);
     })();
-    (function setYear(){document.getElementById('yr').textContent=new Date().getFullYear()})();
+
+    // --------------------------
+    // Small snowflake visual (cosmetic)
+    // --------------------------
+    (function snow() {
+      function create() {
+        const el = document.createElement('div');
+        el.className = 'snowflake';
+        el.textContent = '❄';
+        const size = (Math.random() * 1.5 + 0.5).toFixed(2);
+        el.style.fontSize = size + 'em';
+        el.style.left = Math.random() * window.innerWidth + 'px';
+        const dur = Math.random() * 5000 + 5000;
+        el.style.transition = `transform ${dur}ms linear, opacity ${dur}ms linear`;
+        document.body.appendChild(el);
+        const driftX = (Math.random() * 200 - 100).toFixed(2);
+        // requestAnimationFrame to ensure transition applies
+        requestAnimationFrame(() => {
+          el.style.transform = `translate(${driftX}px, ${window.innerHeight + 60}px)`;
+          el.style.opacity = '0';
+        });
+        setTimeout(() => el.remove(), dur + 200);
+      }
+      // spawn gently
+      setInterval(create, 300);
+    })();
+
+    // --------------------------
+    // Footer year filler
+    // --------------------------
+    (function setYear() {
+      document.getElementById('yr').textContent = new Date().getFullYear();
+    })();
   </script>
 </body>
 </html>
