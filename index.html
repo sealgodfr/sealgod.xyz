@@ -123,21 +123,44 @@ function createSnowflake() {
   const snowflake = document.createElement('div');
   snowflake.classList.add('snowflake');
   snowflake.textContent = '❄';
-  let x = Math.random() * window.innerWidth;
+  const x = Math.random() * window.innerWidth;
   const size = Math.random() * 1.5 + 0.5;
+  const fallDuration = Math.random() * 5000 + 7000;
+  const horizontalDrift = Math.random() * 100 - 50;
+  const swayAmplitude = Math.random() * 40 + 20;
+  const swayDuration = Math.random() * 3000 + 2000;
   snowflake.style.fontSize = size + 'em';
+  snowflake.style.position = 'fixed';
+  snowflake.style.top = '-2em';
   snowflake.style.left = x + 'px';
-  snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
+  snowflake.style.opacity = Math.random() * 0.5 + 0.5;
   document.body.appendChild(snowflake);
-  let drift = Math.random() * 100 - 50;
-  snowflake.animate([
-    { transform: `translate(${drift}px, 100vh)` }
-  ], {
-    duration: Math.random() * 5000 + 5000,
-    easing: 'linear',
-    fill: 'forwards'
-  });
-  setTimeout(() => snowflake.remove(), 10000);
+  const fall = snowflake.animate(
+    [
+      { transform: `translate(${horizontalDrift}px, 0)` },
+      { transform: `translate(${horizontalDrift}px, 100vh)` }
+    ],
+    {
+      duration: fallDuration,
+      easing: 'linear',
+      fill: 'forwards'
+    }
+  );
+  const sway = snowflake.animate(
+    [
+      { transform: `translateX(${swayAmplitude}px)` },
+      { transform: `translateX(${-swayAmplitude}px)` }
+    ],
+    {
+      duration: swayDuration,
+      iterations: Infinity,
+      direction: 'alternate',
+      easing: 'ease-in-out'
+    }
+  );
+  setTimeout(() => {
+    snowflake.remove();
+  }, fallDuration);
 }
 setInterval(createSnowflake, 200);
 </script>
