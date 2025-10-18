@@ -121,9 +121,7 @@ const gameLink = document.getElementById('loadGame');
 const gameFrame = document.getElementById('gameFrame');
 
 gameLink.addEventListener('click', () => {
-  gameFrame.src = "https://scratch.mit.edu/projects/105500895/"; // path to your TurboWarp-exported HTML5 game
-  gameFrame.style.display = "block";          // show the iframe
-  gameLink.style.display = "none";            // hide the placeholder button
+  window.open("https://scratch.mit.edu/projects/105500895/", "_blank");
 });
 </script>
 
