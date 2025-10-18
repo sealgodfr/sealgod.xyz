@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>&lt;3</title> <!-- Shows in browser tab -->
+  <title>&lt;3</title>
   <style>
     html, body {
       height: 100%;
       margin: 0;
       padding: 0;
       overflow: hidden;
-      background: #f2b8d4; /* dark pink background */
+      background: #f2b8d4;
       font-family: 'Inter', system-ui, sans-serif;
       display: flex;
       justify-content: center;
@@ -21,10 +21,11 @@
     /* Snowflakes */
     .snowflake {
       position: absolute;
-      top: -10px;
+      top: 0;
       color: white;
       font-size: 1em;
       opacity: 0.8;
+      text-shadow: 0 0 8px #fff, 0 0 16px #fef, 0 0 24px #ffccff;
       animation: fall linear infinite;
       pointer-events: none;
     }
@@ -42,32 +43,33 @@
 
     /* Glowy frosted box */
     .box {
-      background: rgba(255, 255, 255, 0.15); /* translucent white */
+      background: rgba(255, 255, 255, 0.15);
       border-radius: 50px;
-      width: 1000px;  /* bigger width */
-      height: 700px;  /* bigger height */
+      width: 1000px;
+      height: 700px;
       box-shadow: 0 0 60px rgba(255, 255, 255, 0.4), 
-                  0 0 100px rgba(255, 255, 255, 0.2); /* glow effect */
+                  0 0 100px rgba(255, 255, 255, 0.2);
       border: 1px solid rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(15px); /* frosted glass */
+      backdrop-filter: blur(15px);
       display: flex;
-      justify-content: center; /* center vertically */
-      align-items: center;     /* center horizontally */
+      justify-content: center;
+      align-items: center;
       padding: 20px;
       position: relative;
+      z-index: 1;
     }
 
     h1 {
       font-size: 40px;
-      color: #c2185b; /* dark pink text */
+      color: #c2185b;
       margin: 0;
-      visibility: hidden; /* hidden text inside box */
+      visibility: hidden;
     }
   </style>
 </head>
 <body>
   <div class="box">
-    <h1>&lt;3</h1> <!-- hidden, page title shows <3 -->
+    <h1>&lt;3</h1>
   </div>
 
   <script>
@@ -76,11 +78,23 @@
       snowflake.classList.add('snowflake');
       snowflake.textContent = '❄';
 
-      // Random horizontal spawn position
+      // Random horizontal spawn position (all across the screen)
       snowflake.style.left = Math.random() * 100 + 'vw';
+
+      // Random vertical start position for variety (can start anywhere top-down)
+      snowflake.style.top = Math.random() * -20 + 'vh';
+
+      // Random size and fall speed
       snowflake.style.fontSize = (Math.random() * 2 + 0.5) + 'em';
       snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
       snowflake.style.animationDelay = '0s';
+
+      // Add glow effect
+      snowflake.style.textShadow = `
+        0 0 8px #fff,
+        0 0 16px #fef,
+        0 0 24px #ffccff
+      `;
 
       document.body.appendChild(snowflake);
 
@@ -91,7 +105,7 @@
     }
 
     // Spawn snowflakes continuously
-    setInterval(createSnowflake, 200); // every 0.2s
+    setInterval(createSnowflake, 150); // more frequent for fuller effect
   </script>
 </body>
 </html>
