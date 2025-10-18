@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>&lt;3</title> <!-- This is what shows in the browser tab -->
+  <title>&lt;3</title> <!-- Shows in browser tab -->
   <style>
     html, body {
       height: 100%;
@@ -40,33 +40,34 @@
       }
     }
 
+    /* Glowy frosted box */
     .box {
-      background: rgba(255, 255, 255, 0.25); /* white but translucent */
-      border-radius: 35px;
-      width: 900px;
-      height: 600px;
-      box-shadow: 0 0 40px rgba(255, 255, 255, 0.25);
-      text-align: center;
+      background: rgba(255, 255, 255, 0.15); /* translucent white */
+      border-radius: 50px;
+      width: 1000px;  /* bigger width */
+      height: 700px;  /* bigger height */
+      box-shadow: 0 0 60px rgba(255, 255, 255, 0.4), 
+                  0 0 100px rgba(255, 255, 255, 0.2); /* glow effect */
       border: 1px solid rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(15px); /* frosted glass */
       display: flex;
-      flex-direction: column;
-      justify-content: center; /* vertically centered */
-      align-items: center;     /* horizontally centered */
+      justify-content: center; /* center vertically */
+      align-items: center;     /* center horizontally */
       padding: 20px;
+      position: relative;
     }
 
     h1 {
       font-size: 40px;
       color: #c2185b; /* dark pink text */
       margin: 0;
-      visibility: hidden; /* hide text inside box */
+      visibility: hidden; /* hidden text inside box */
     }
   </style>
 </head>
 <body>
   <div class="box">
-    <h1>&lt;3</h1> <!-- hidden inside box, browser tab shows the title -->
+    <h1>&lt;3</h1> <!-- hidden, page title shows <3 -->
   </div>
 
   <script>
@@ -75,7 +76,7 @@
       snowflake.classList.add('snowflake');
       snowflake.textContent = '❄';
 
-      // Spawn from anywhere: left, right, middle
+      // Random horizontal spawn position
       snowflake.style.left = Math.random() * 100 + 'vw';
       snowflake.style.fontSize = (Math.random() * 2 + 0.5) + 'em';
       snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
@@ -83,14 +84,14 @@
 
       document.body.appendChild(snowflake);
 
-      // Remove snowflake after it falls to prevent DOM clutter
+      // Remove snowflake after falling
       snowflake.addEventListener('animationend', () => {
         snowflake.remove();
       });
     }
 
-    // Continuously spawn snowflakes
-    setInterval(createSnowflake, 200); // new snowflake every 0.2s
+    // Spawn snowflakes continuously
+    setInterval(createSnowflake, 200); // every 0.2s
   </script>
 </body>
 </html>
