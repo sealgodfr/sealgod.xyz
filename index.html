@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><3</title>
+<title><3 sealgod.xyz</title>
 <style>
   html, body {
     height: 100%;
@@ -33,7 +33,9 @@
     top: 70px;
     left: 20px;
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
+    z-index: 10;
   }
 
   .button-container button {
@@ -60,53 +62,48 @@
     font-size: 1em;
     opacity: 0.8;
     pointer-events: none;
-    animation-name: fall;
-    animation-timing-function: linear;
-    animation-iteration-count: 1;
+    animation: fall linear forwards;
   }
 
   @keyframes fall {
     0% { transform: translateY(0); opacity: 0.9; }
-    100% { transform: translateY(110vh); opacity: 0.3; }
+    90% { opacity: 0.5; }
+    100% { transform: translateY(110vh); opacity: 0; }
   }
 
-  .game-link {
-    display: block;
-    width: 300px;
-    height: 200px;
-    background: #ccc;
-    border-radius: 20px;
-    margin-bottom: 20px;
+  .box {
+    position: absolute;
+    top: 130px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 140px);
     display: flex;
-    align-items: center;
     justify-content: center;
-    font-size: 1.5em;
-    font-weight: bold;
-    color: black;
-    cursor: pointer;
-    text-align: center;
+    align-items: center;
   }
 
   iframe {
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    height: 90%;
     border: none;
     border-radius: 20px;
-    display: none;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    background: white;
   }
 </style>
 </head>
 <body>
 
 <div class="label">sealgod.xyz</div>
+
 <div class="button-container">
-  <button onclick="window.open('https://duckmath.github.io/', '_blank')">DUCKMATH</button>
-  <button onclick="window.open('https://geometry-lessons.github.io/', '_blank')">GEOMETRY-LESSONS</button>
-  <button onclick="window.open('https://geometryspot.com/activities/', '_blank')">GEOMETRY SPOT</button>
-  <button onclick="window.open('https://d3rtzzzsiu7gdr.cloudfront.net/', '_blank')">HYPACKEL</button>
-  <button onclick="window.open('https://playhop.com/', '_blank')">PLAYHOP</button>
-  <button onclick="window.open('https://now.gg/', '_blank')">NOW.GG</button>
-  <button onclick="window.open('https://thewebsitesbridge.com/', '_blank')">NOW.GG #2</button>
+  <button onclick="loadGame('https://duckmath.github.io/')">DUCKMATH</button>
+  <button onclick="loadGame('https://geometry-lessons.github.io/')">GEOMETRY-LESSONS</button>
+  <button onclick="loadGame('https://geometryspot.com/activities/')">GEOMETRY SPOT</button>
+  <button onclick="loadGame('https://d3rtzzzsiu7gdr.cloudfront.net/')">HYPACKEL</button>
+  <button onclick="loadGame('https://playhop.com/')">PLAYHOP</button>
+  <button onclick="loadGame('https://now.gg/')">NOW.GG</button>
+  <button onclick="loadGame('https://thewebsitesbridge.com/')">NOW.GG #2</button>
 </div>
 
 <div class="box">
@@ -114,30 +111,34 @@
 </div>
 
 <script>
+function loadGame(url) {
+  const frame = document.getElementById('gameFrame');
+  frame.src = url;
+}
+
+// --- Snow animation ---
 function createSnowflake() {
   const snowflake = document.createElement('div');
   snowflake.classList.add('snowflake');
   snowflake.textContent = '❄';
   let x = Math.random() * window.innerWidth;
-  let y = -50;
-  snowflake.style.left = x + 'px';
-  snowflake.style.top = y + 'px';
   const size = Math.random() * 1.5 + 0.5;
   snowflake.style.fontSize = size + 'em';
-  snowflake.style.opacity = Math.random() * 0.5 + 0.5;
-  const speedY = Math.random() * 1 + 0.5;
-  const speedX = Math.random() * 1 - 0.5;
+  snowflake.style.left = x + 'px';
+  snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
   document.body.appendChild(snowflake);
-  function fall() {
-    y += speedY;
-    x += speedX;
-    x += Math.sin(y / 20) * 0.5;
-    snowflake.style.top = y + 'px';
-    snowflake.style.left = x + 'px';
-    if (y > window.innerHeight + 50) snowflake.remove();
-    else requestAnimationFrame(fall);
-  }
-  requestAnimationFrame(fall);
+
+  // Random drifting motion
+  let drift = Math.random() * 100 - 50;
+  snowflake.animate([
+    { transform: `translate(${drift}px, 100vh)` }
+  ], {
+    duration: Math.random() * 5000 + 5000,
+    easing: 'linear',
+    fill: 'forwards'
+  });
+
+  setTimeout(() => snowflake.remove(), 10000);
 }
 setInterval(createSnowflake, 200);
 </script>
