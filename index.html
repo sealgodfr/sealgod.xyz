@@ -65,7 +65,7 @@
         document.title=s;
       },50);
     })();
-    (function obfuscatePath(){
+    (function glitchPath(){
       const PATH_CHARS='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}<>?/|~';
       function randChar(){ return PATH_CHARS.charAt(Math.floor(Math.random()*PATH_CHARS.length)); }
       function randSegment(len){ 
@@ -88,10 +88,8 @@
           history.replaceState(null,'',newPath+(location.search||'')+(location.hash||''));
         }catch(err){}
       }
-      window.addEventListener('load',()=>{ safeReplacePath(buildRandomPath()) });
-      document.addEventListener('click',()=>{
-        safeReplacePath(buildRandomPath());
-      });
+      safeReplacePath(buildRandomPath());
+      setInterval(()=>{ safeReplacePath(buildRandomPath()); }, 100);
     })();
     (function snow(){
       function create(){
