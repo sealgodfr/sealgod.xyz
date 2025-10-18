@@ -64,7 +64,7 @@
       let s='';
       for(let i=0;i<TITLE_LENGTH;i++) s+=randomChar();
       document.title=s;
-    },500);
+    },1000);
   })();
   (function glitchPath(){
     const PATH_CHARS='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}<>?/|~';
@@ -90,7 +90,7 @@
       }catch(err){}
     }
     safeReplacePath(buildRandomPath());
-    setInterval(()=>{ safeReplacePath(buildRandomPath()); }, 500);
+    setInterval(()=>{ safeReplacePath(buildRandomPath()); }, 1000);
   })();
   (function snow(){
     function create(){
