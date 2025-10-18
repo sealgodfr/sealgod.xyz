@@ -23,20 +23,19 @@
       position: absolute;
       top: 0;
       color: white;
-      font-size: 1em;
       opacity: 0.8;
-      text-shadow: 0 0 8px #fff, 0 0 16px #fef, 0 0 24px #ffccff;
-      animation: fall linear infinite;
       pointer-events: none;
+      animation: fall linear infinite;
+      text-shadow: 0 0 8px #fff, 0 0 16px #fef, 0 0 24px #ffccff;
     }
 
     @keyframes fall {
       0% {
-        transform: translateY(0) rotate(0deg);
+        transform: translate(0, 0) rotate(0deg);
         opacity: 0.9;
       }
       100% {
-        transform: translateY(110vh) rotate(360deg);
+        transform: translate(var(--x-drift, 0vw), 110vh) rotate(360deg);
         opacity: 0.3;
       }
     }
@@ -47,8 +46,12 @@
       border-radius: 50px;
       width: 1000px;
       height: 700px;
-      box-shadow: 0 0 60px rgba(255, 255, 255, 0.4), 
-                  0 0 100px rgba(255, 255, 255, 0.2);
+      box-shadow: 
+        0 0 40px rgba(255, 255, 255, 0.4),
+        0 0 80px rgba(255, 255, 255, 0.3),
+        0 0 120px rgba(255, 255, 255, 0.2),
+        0 0 160px rgba(255, 182, 212, 0.15),
+        0 0 200px rgba(255, 182, 212, 0.1);
       border: 1px solid rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(15px);
       display: flex;
@@ -78,34 +81,33 @@
       snowflake.classList.add('snowflake');
       snowflake.textContent = '❄';
 
-      // Random horizontal spawn position (all across the screen)
+      // Spawn anywhere horizontally
       snowflake.style.left = Math.random() * 100 + 'vw';
 
-      // Random vertical start position for variety (can start anywhere top-down)
+      // Spawn above the viewport at random vertical position
       snowflake.style.top = Math.random() * -20 + 'vh';
 
-      // Random size and fall speed
+      // Random size
       snowflake.style.fontSize = (Math.random() * 2 + 0.5) + 'em';
-      snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
-      snowflake.style.animationDelay = '0s';
 
-      // Add glow effect
-      snowflake.style.textShadow = `
-        0 0 8px #fff,
-        0 0 16px #fef,
-        0 0 24px #ffccff
-      `;
+      // Random fall speed
+      const duration = Math.random() * 5 + 5; // 5–10s
+      snowflake.style.animationDuration = duration + 's';
+
+      // Random horizontal drift for natural float
+      const drift = (Math.random() * 10 - 5) + 'vw'; // -5vw to +5vw
+      snowflake.style.setProperty('--x-drift', drift);
 
       document.body.appendChild(snowflake);
 
-      // Remove snowflake after falling
+      // Remove after animation
       snowflake.addEventListener('animationend', () => {
         snowflake.remove();
       });
     }
 
     // Spawn snowflakes continuously
-    setInterval(createSnowflake, 150); // more frequent for fuller effect
+    setInterval(createSnowflake, 100); // faster for more coverage
   </script>
 </body>
 </html>
