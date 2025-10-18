@@ -58,49 +58,32 @@ function createSnowflake() {
   const snowflake = document.createElement('div');
   snowflake.classList.add('snowflake');
   snowflake.textContent = '❄';
-  
-  // Initial positions
   let x = Math.random() * window.innerWidth;
-  let y = -50; // start above the screen
+  let y = -50;
   snowflake.style.position = 'fixed';
   snowflake.style.left = x + 'px';
   snowflake.style.top = y + 'px';
-  
-  // Randomize size and opacity
   const size = Math.random() * 1.5 + 0.5;
   snowflake.style.fontSize = size + 'em';
   snowflake.style.opacity = Math.random() * 0.5 + 0.5;
-  
-  // Velocity
-  const speedY = Math.random() * 1 + 0.5; // falling speed
-  const speedX = Math.random() * 1 - 0.5; // horizontal drift
-  
+  const speedY = Math.random() * 1 + 0.5;
+  const speedX = Math.random() * 1 - 0.5;
   document.body.appendChild(snowflake);
-  
   function fall() {
     y += speedY;
     x += speedX;
-    
-    // Slightly change horizontal direction over time
     x += Math.sin(y / 20) * 0.5;
-    
     snowflake.style.top = y + 'px';
     snowflake.style.left = x + 'px';
-    
-    // Remove snowflake if it falls off screen
     if (y > window.innerHeight + 50) {
       snowflake.remove();
     } else {
       requestAnimationFrame(fall);
     }
   }
-  
   requestAnimationFrame(fall);
 }
-
-// Create a new snowflake every 200ms
 setInterval(createSnowflake, 200);
-
   </script>
 </body>
 </html>
