@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>&lt;3</title>
+  <title>Snow</title>
   <style>
     html, body {
       height: 100%;
@@ -11,85 +11,84 @@
       padding: 0;
       overflow: hidden;
       background: #f2b8d4; /* soft pink background */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Inter', system-ui, sans-serif;
       position: relative;
+      font-family: 'Inter', system-ui, sans-serif;
     }
 
     /* Snowflakes */
     .snowflake {
       position: absolute;
-      top: -10px;
+      top: 0;
       color: white;
       font-size: 1em;
       opacity: 0.8;
-      animation: fall linear infinite;
       pointer-events: none;
-    }
-
-    @keyframes fall {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0.9;
-      }
-      100% {
-        transform: translateY(110vh) rotate(360deg);
-        opacity: 0.3;
-      }
     }
 
     .box {
       background: rgba(150, 150, 150, 0.25);
       border-radius: 35px;
-      width: 900px;   /* bigger width */
-      height: 600px;  /* bigger height */
+      width: 900px;
+      height: 600px;
       box-shadow: 0 0 40px rgba(255, 255, 255, 0.25);
-      text-align: center;
       border: 1px solid rgba(255, 255, 255, 0.2);
       z-index: 2;
       backdrop-filter: blur(10px);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      padding-top: 40px;
-    }
-
-    h1 {
-      font-size: 40px;      /* smaller text */
-      color: #b23a5b;       /* dark pink color */
-      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   </style>
 </head>
 <body>
-  <div class="box">
-    <h1>&lt;3</h1>
-  </div>
+  <div class="box"></div>
 
-  <!-- Snowflake generator -->
   <script>
     function createSnowflake() {
       const snowflake = document.createElement('div');
       snowflake.classList.add('snowflake');
       snowflake.textContent = '❄';
-      snowflake.style.left = Math.random() * 100 + 'vw'; // spawn anywhere horizontally
+
+      // Decide if snowflake comes from left or right
+      const fromLeft = Math.random() < 0.5;
+
+      // Starting positions: left/right edge, random vertical
+      snowflake.style.left = fromLeft ? '-2vw' : '102vw';
+      snowflake.style.top = Math.random() * 100 + 'vh';
+
+      // Size and opacity
       snowflake.style.fontSize = (Math.random() * 1.5 + 0.5) + 'em';
-      snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
       snowflake.style.opacity = Math.random() * 0.5 + 0.5;
 
-      document.body.appendChild(snowflake);
+      // Animation duration and direction
+      const duration = Math.random() * 5 + 5; // 5-10s
+      const endX = fromLeft ? window.innerWidth + 20 : -20; // offscreen
+      const endY = Math.random() * window.innerHeight;
 
-      // Remove snowflake after falling to prevent memory buildup
-      snowflake.addEventListener('animationend', () => {
-        snowflake.remove();
-      });
+      // Animate with JS
+      let startTime = null;
+      function animate(time) {
+        if (!startTime) startTime = time;
+        const progress = (time - startTime) / (duration * 1000);
+        if (progress < 1) {
+          const x = fromLeft 
+            ? -20 + progress * (window.innerWidth + 40) 
+            : window.innerWidth + 20 - progress * (window.innerWidth + 40);
+          const y = parseFloat(snowflake.style.top) + progress * (endY - parseFloat(snowflake.style.top));
+          snowflake.style.transform = `translate(${x}px, ${y}px) rotate(${progress * 360}deg)`;
+          requestAnimationFrame(animate);
+        } else {
+          snowflake.remove();
+        }
+      }
+
+      document.body.appendChild(snowflake);
+      requestAnimationFrame(animate);
     }
 
-    // Continuously spawn snowflakes
-    setInterval(createSnowflake, 200); // spawn a new snowflake every 0.2s
+    // Spawn snowflakes continuously
+    setInterval(createSnowflake, 200);
   </script>
 </body>
 </html>
