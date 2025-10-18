@@ -116,12 +116,12 @@ function createSnowflake() {
 }
 setInterval(createSnowflake, 200);
 
-// Load Geometry Dash in iframe
+// Load HTML5 Geometry Dash in iframe
 const gameLink = document.getElementById('loadGame');
 const gameFrame = document.getElementById('gameFrame');
 
 gameLink.addEventListener('click', () => {
-  gameFrame.src = "https://scratch.mit.edu/projects/105500895/fullscreen/"; // game URL
+  gameFrame.src = "geometry-dash/index.html"; // path to your TurboWarp-exported HTML5 game
   gameFrame.style.display = "block";          // show the iframe
   gameLink.style.display = "none";            // hide the placeholder button
 });
