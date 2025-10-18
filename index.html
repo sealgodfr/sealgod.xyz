@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title><3</title>
+  <title>Games Box</title>
   <style>
     html, body {
       height: 100%;
@@ -11,7 +11,6 @@
       padding: 0;
       overflow: hidden;
       background: #f2b8d4;
-      position: relative;
       font-family: 'Inter', system-ui, sans-serif;
     }
     .snowflake {
@@ -26,20 +25,16 @@
       animation-iteration-count: 1;
     }
     @keyframes fall {
-      0% {
-        transform: translateY(0);
-        opacity: 0.9;
-      }
-      100% {
-        transform: translateY(110vh);
-        opacity: 0.3;
-      }
+      0% { transform: translateY(0); opacity: 0.9; }
+      100% { transform: translateY(110vh); opacity: 0.3; }
     }
     .box {
       background: rgba(250, 250, 250, 0.25);
       border-radius: 35px;
-      width: 1725px;
-      height: 850px;
+      width: 90%;
+      max-width: 1725px;
+      height: 80%;
+      max-height: 850px;
       box-shadow: 0 0 40px rgba(255, 255, 255, 0.25);
       border: 1px solid rgba(255, 255, 255, 0.2);
       z-index: 2;
@@ -48,42 +43,57 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    iframe {
+      border: none;
+      border-radius: 15px;
+      flex-shrink: 0;
     }
   </style>
 </head>
 <body>
-  <div class="box"></div>
+  <div class="box">
+    <!-- Example Games -->
+    <iframe src="https://geometry-lessons.github.io/games/geometry-dash-lite" width="600" height="400"></iframe>
+    <iframe src="https://geometry-lessons.github.io/games/2048" width="400" height="400"></iframe>
+    <iframe src="https://geometry-lessons.github.io/games/tic-tac-toe" width="400" height="400"></iframe>
+    <iframe src="https://geometry-lessons.github.io/games/sudoku" width="400" height="400"></iframe>
+    <iframe src="https://geometry-lessons.github.io/games/maze" width="600" height="400"></iframe>
+  </div>
+
   <script>
-function createSnowflake() {
-  const snowflake = document.createElement('div');
-  snowflake.classList.add('snowflake');
-  snowflake.textContent = '❄';
-  let x = Math.random() * window.innerWidth;
-  let y = -50;
-  snowflake.style.position = 'fixed';
-  snowflake.style.left = x + 'px';
-  snowflake.style.top = y + 'px';
-  const size = Math.random() * 1.5 + 0.5;
-  snowflake.style.fontSize = size + 'em';
-  snowflake.style.opacity = Math.random() * 0.5 + 0.5;
-  const speedY = Math.random() * 1 + 0.5;
-  const speedX = Math.random() * 1 - 0.5;
-  document.body.appendChild(snowflake);
-  function fall() {
-    y += speedY;
-    x += speedX;
-    x += Math.sin(y / 20) * 0.5;
-    snowflake.style.top = y + 'px';
-    snowflake.style.left = x + 'px';
-    if (y > window.innerHeight + 50) {
-      snowflake.remove();
-    } else {
+    function createSnowflake() {
+      const snowflake = document.createElement('div');
+      snowflake.classList.add('snowflake');
+      snowflake.textContent = '❄';
+      let x = Math.random() * window.innerWidth;
+      let y = -50;
+      snowflake.style.left = x + 'px';
+      snowflake.style.top = y + 'px';
+      const size = Math.random() * 1.5 + 0.5;
+      snowflake.style.fontSize = size + 'em';
+      snowflake.style.opacity = Math.random() * 0.5 + 0.5;
+      const speedY = Math.random() * 1 + 0.5;
+      const speedX = Math.random() * 1 - 0.5;
+      document.body.appendChild(snowflake);
+      function fall() {
+        y += speedY;
+        x += speedX;
+        x += Math.sin(y / 20) * 0.5;
+        snowflake.style.top = y + 'px';
+        snowflake.style.left = x + 'px';
+        if (y > window.innerHeight + 50) snowflake.remove();
+        else requestAnimationFrame(fall);
+      }
       requestAnimationFrame(fall);
     }
-  }
-  requestAnimationFrame(fall);
-}
-setInterval(createSnowflake, 200);
+    setInterval(createSnowflake, 200);
   </script>
 </body>
 </html>
