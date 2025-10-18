@@ -106,7 +106,7 @@
         requestAnimationFrame(()=>{el.style.transform=`translate(${driftX}px, ${window.innerHeight+60}px)`; el.style.opacity='0'});
         setTimeout(()=>el.remove(),dur+200);
       }
-      setInterval(create,300);
+      setInterval(create, 200);
     })();
     (function setYear(){
       document.getElementById('yr').textContent=new Date().getFullYear();
