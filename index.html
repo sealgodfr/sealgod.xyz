@@ -40,27 +40,40 @@
       }
     }
 
-    /* Glowy frosted box */
-    .box {
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 50px;
-      width: 1000px;
-      height: 700px;
-      box-shadow: 
-        0 0 40px rgba(255, 255, 255, 0.4),
-        0 0 80px rgba(255, 255, 255, 0.3),
-        0 0 120px rgba(255, 255, 255, 0.2),
-        0 0 160px rgba(255, 182, 212, 0.15),
-        0 0 200px rgba(255, 182, 212, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(15px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      position: relative;
-      z-index: 1;
-    }
+.box {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50px;
+  width: 1000px;
+  height: 700px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  backdrop-filter: blur(15px);
+  
+  /* Multi-layered glow */
+  box-shadow: 
+    0 0 20px rgba(255, 255, 255, 0.4),
+    0 0 40px rgba(255, 255, 255, 0.3),
+    0 0 80px rgba(255, 182, 212, 0.25),
+    0 0 120px rgba(255, 182, 212, 0.2),
+    0 0 160px rgba(255, 182, 212, 0.15);
+}
+
+/* Optional: soft glowing aura around the box */
+.box::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: calc(100% + 100px);
+  height: calc(100% + 100px);
+  border-radius: 50px;
+  background: radial-gradient(circle, rgba(255,182,212,0.3) 0%, rgba(255,182,212,0) 70%);
+  z-index: -1;
+}
 
     h1 {
       font-size: 40px;
