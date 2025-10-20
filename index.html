@@ -268,12 +268,12 @@
       document.title = randomTitle(TITLE_LENGTH);
       setInterval(() => { document.title = randomTitle(TITLE_LENGTH); }, TITLE_INTERVAL);
     })();
-    (function obfuscatePathOnce() {
-      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      const rand = len => Array.from({ length: len }, () => chars.charAt(Math.floor(Math.random() * chars.length))).join('');
-      const path = '/' + Array.from({ length: 8 }, () => rand(Math.floor(Math.random() * 10) + 4)).join('/');
-      history.replaceState(null, '', path);
-    })();
+    //(function obfuscatePathOnce() {
+      //const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      //const rand = len => Array.from({ length: len }, () => chars.charAt(Math.floor(Math.random() * chars.length))).join('');
+      //const path = '/' + Array.from({ length: 8 }, () => rand(Math.floor(Math.random() * 10) + 4)).join('/');
+      //history.replaceState(null, '', path);
+    //})();
     (function snow() {
       function create() {
         const el = document.createElement('div');
