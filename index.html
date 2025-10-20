@@ -6,16 +6,99 @@
   <title>sealgod.xyz</title>
   <base id="site-base" href="/" />
   <style>
-    html,body{height:100%;margin:0;padding:0;overflow:hidden;background:#f2b8d4;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial}
-    .label{position:absolute;top:20px;left:20px;font-size:2em;font-weight:700;color:rgba(0,0,0,.8);text-shadow:0 0 5px rgba(255,255,255,.5);backdrop-filter:blur(2px)}
-    .button-container{position:absolute;top:70px;left:20px;display:flex;flex-wrap:wrap;gap:10px;z-index:10}
-    .button-container button{padding:10px 15px;border-radius:10px;border:none;cursor:pointer;background:rgba(255,255,255,.32);backdrop-filter:blur(5px);transition:all .16s ease}
-    .button-container button:hover{transform:scale(1.05);background:rgba(255,255,255,.6)}
-    .box{position:absolute;top:130px;left:0;width:100%;height:calc(100% - 140px);display:flex;justify-content:center;align-items:center}
-    iframe{width:90%;height:90%;border-radius:20px;border:none;box-shadow:0 0 20px rgba(0,0,0,.2);display:none;background:#fff}
-    .snowflake{position:absolute;top:-10px;color:white;pointer-events:none;opacity:.8}
-    @media (max-width:768px){.label{font-size:1.5em}.button-container{top:60px;left:10px}iframe{width:95%;height:85%}}
-    footer{position:absolute;bottom:10px;width:100%;text-align:center;color:rgba(0,0,0,.6);font-size:.9em}
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
+      background: linear-gradient(135deg, #b993d6, #8ca6db);
+      display: flex;
+      flex-direction: column;
+      color: #222;
+    }
+    .label {
+      position: absolute;
+      top: 25px;
+      left: 30px;
+      font-size: 2.2em;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      letter-spacing: 1px;
+    }
+    .button-container {
+      position: absolute;
+      top: 90px;
+      left: 30px;
+      right: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      z-index: 10;
+      justify-content: flex-start;
+    }
+    .button-container button {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 12px;
+      padding: 10px 18px;
+      font-size: 0.95em;
+      letter-spacing: 0.5px;
+      backdrop-filter: blur(8px);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    .button-container button:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    .box {
+      position: absolute;
+      top: 150px;
+      left: 0;
+      width: 100%;
+      height: calc(100% - 160px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    iframe {
+      width: 88%;
+      height: 88%;
+      border: none;
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+      display: none;
+      transition: all 0.4s ease;
+    }
+    footer {
+      position: absolute;
+      bottom: 12px;
+      width: 100%;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 0.9em;
+      letter-spacing: 0.3px;
+    }
+    .snowflake {
+      position: absolute;
+      top: -10px;
+      color: white;
+      opacity: 0.8;
+      pointer-events: none;
+      text-shadow: 0 0 10px rgba(255,255,255,0.5);
+    }
+    @media (max-width: 768px) {
+      .label { font-size: 1.5em; top: 15px; left: 20px; }
+      .button-container { top: 70px; left: 15px; right: 15px; }
+      .button-container button { flex: 1 1 100%; text-align: center; }
+      iframe { width: 95%; height: 85%; }
+    }
   </style>
 </head>
 <body>
@@ -46,14 +129,6 @@
   </div>
   <footer>&copy; <span id="yr"></span> sealgod.xyz</footer>
   <script>
-    (function setAbsoluteBase() {
-      try {
-        const base = document.getElementById('site-base');
-        base.setAttribute('href', location.origin + '/');
-      } catch (e) {
-        console.warn('Could not set base href:', e);
-      }
-    })();
     const frame = document.getElementById('gameFrame');
     function loadGame(url) {
       if (!url) return;
@@ -66,75 +141,39 @@
     }
     (function titleCycler() {
       const CHARSET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}<>?/|~';
-      function randomChar() {
-        return CHARSET.charAt(Math.floor(Math.random() * CHARSET.length));
-      }
-      function randomTitle(len = 12) {
-        let s = '';
-        for (let i = 0; i < len; i++) s += randomChar();
-        return s;
-      }
+      function randomChar() { return CHARSET.charAt(Math.floor(Math.random() * CHARSET.length)); }
+      function randomTitle(len = 12) { return Array.from({ length: len }, randomChar).join(''); }
       const TITLE_LENGTH = 14;
       const TITLE_INTERVAL = 500;
       document.title = randomTitle(TITLE_LENGTH);
-      setInterval(() => {
-        document.title = randomTitle(TITLE_LENGTH);
-      }, TITLE_INTERVAL);
+      setInterval(() => { document.title = randomTitle(TITLE_LENGTH); }, TITLE_INTERVAL);
     })();
     (function obfuscatePathOnce() {
-      const PATH_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}<>?/|~';
-      function randChar() { return PATH_CHARS.charAt(Math.floor(Math.random() * PATH_CHARS.length)); }
-      function randSegment(len) {
-        let s = '';
-        for (let i = 0; i < len; i++) s += randChar();
-        return s;
-      }
-      function buildRandomPath(totalLength = 80, minSeg = 5, maxSeg = 18) {
-        let parts = [];
-        let remaining = totalLength;
-        while (remaining > 0) {
-          const segLen = Math.min(remaining, Math.floor(Math.random() * (maxSeg - minSeg + 1)) + minSeg);
-          parts.push(randSegment(segLen));
-          remaining -= segLen;
-        }
-        return '/' + parts.join('/');
-      }
-      function safeReplacePath(newPath) {
-        try {
-          const newUrl = newPath + (location.search || '') + (location.hash || '');
-          history.replaceState(null, '', newUrl);
-        } catch (err) {
-          console.warn('Obfuscation failed:', err);
-        }
-      }
-      window.addEventListener('load', () => {
-        const obfPath = buildRandomPath(240, 6, 16);
-        safeReplacePath(obfPath);
-      });
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      const rand = len => Array.from({ length: len }, () => chars.charAt(Math.floor(Math.random() * chars.length))).join('');
+      const path = '/' + Array.from({ length: 8 }, () => rand(Math.floor(Math.random() * 10) + 4)).join('/');
+      history.replaceState(null, '', path);
     })();
     (function snow() {
       function create() {
         const el = document.createElement('div');
         el.className = 'snowflake';
         el.textContent = '❄';
-        const size = (Math.random() * 1.5 + 0.5).toFixed(2);
-        el.style.fontSize = size + 'em';
+        el.style.fontSize = (Math.random() * 1.3 + 0.5) + 'em';
         el.style.left = Math.random() * window.innerWidth + 'px';
         const dur = Math.random() * 5000 + 5000;
         el.style.transition = `transform ${dur}ms linear, opacity ${dur}ms linear`;
         document.body.appendChild(el);
-        const driftX = (Math.random() * 200 - 100).toFixed(2);
+        const driftX = Math.random() * 200 - 100;
         requestAnimationFrame(() => {
           el.style.transform = `translate(${driftX}px, ${window.innerHeight + 60}px)`;
           el.style.opacity = '0';
         });
         setTimeout(() => el.remove(), dur + 200);
       }
-      setInterval(create, 200);
+      setInterval(create, 250);
     })();
-    (function setYear() {
-      document.getElementById('yr').textContent = new Date().getFullYear();
-    })();
+    document.getElementById('yr').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
