@@ -22,8 +22,6 @@ html, body {
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-
-/* Loader styles */
 #loadingScreen {
   position: fixed;
   top: 0; left: 0;
@@ -100,8 +98,6 @@ body.loaded #loadingScreen {
   0% { transform: translateY(0); }
   100% { transform: translateY(120%); opacity: 0; }
 }
-
-/* Main interface */
 .label {
   position: absolute;
   top: 25px;
@@ -392,12 +388,6 @@ function resetHideTimer() {
     setTimeout(() => el.remove(), dur + 200);
   }
   setInterval(create, 250);
-})();
-(function obfuscatePathOnce() {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  const rand = len => Array.from({ length: len }, () => chars.charAt(Math.floor(Math.random() * chars.length))).join('');
-  const path = '/' + Array.from({ length: 8 }, () => rand(Math.floor(Math.random() * 10) + 4)).join('/');
-  history.replaceState(null, '', path);
 })();
 document.getElementById('yr').textContent = new Date().getFullYear();
 </script>
