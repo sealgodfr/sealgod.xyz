@@ -84,15 +84,27 @@
       left: 0;
       width: 88%;
       height: 88%;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.55);
       border-radius: 18px;
-      display: none;
+      display: flex;
       align-items: center;
       justify-content: center;
       font-size: 3em;
       color: white;
-      text-shadow: 0 0 15px rgba(255,255,255,0.7);
+      opacity: 0;
+      pointer-events: none;
+      text-shadow: 0 0 20px rgba(255,255,255,0.8);
+      transition: opacity 0.4s ease;
       z-index: 2;
+    }
+    .pause-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+      animation: glowPulse 2s infinite ease-in-out;
+    }
+    @keyframes glowPulse {
+      0%,100% { text-shadow: 0 0 20px rgba(255,255,255,0.8); }
+      50% { text-shadow: 0 0 40px rgba(255,255,255,1); }
     }
     footer {
       position: absolute;
@@ -193,7 +205,7 @@
   </div>
   <div class="box">
     <iframe id="gameFrame" src=""></iframe>
-    <div class="pause-overlay" id="pauseOverlay">⏸</div>
+    <div class="pause-overlay" id="pauseOverlay">⏸ Paused</div>
   </div>
   <div class="game-bar" id="gameBar">
     <div class="bar-left">
@@ -219,7 +231,7 @@
       if (!url) return;
       frame.src = url;
       frame.style.display = 'block';
-      pauseOverlay.style.display = 'none';
+      pauseOverlay.classList.remove('active');
       paused = false;
       titleEl.textContent = name || 'Unknown Game';
       bar.style.display = 'flex';
@@ -234,8 +246,13 @@
     requestAnimationFrame(updateFPS);
     pauseBtn.addEventListener('click', () => {
       paused = !paused;
-      pauseOverlay.style.display = paused ? 'flex' : 'none';
-      frame.style.filter = paused ? 'brightness(0.3)' : 'none';
+      if (paused) {
+        pauseOverlay.classList.add('active');
+        frame.style.filter = 'brightness(0.3)';
+      } else {
+        pauseOverlay.classList.remove('active');
+        frame.style.filter = 'none';
+      }
     });
     fullscreenBtn.addEventListener('click', () => {
       if (!document.fullscreenElement) {
