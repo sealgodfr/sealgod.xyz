@@ -75,6 +75,24 @@
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
       display: none;
       transition: all 0.4s ease;
+      position: relative;
+      z-index: 1;
+    }
+    .pause-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 88%;
+      height: 88%;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 18px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 3em;
+      color: white;
+      text-shadow: 0 0 15px rgba(255,255,255,0.7);
+      z-index: 2;
     }
     footer {
       position: absolute;
@@ -93,11 +111,60 @@
       pointer-events: none;
       text-shadow: 0 0 10px rgba(255,255,255,0.5);
     }
+    .game-bar {
+      position: absolute;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      width: 70%;
+      max-width: 900px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      color: white;
+      padding: 10px 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      z-index: 5;
+      transition: all 0.3s ease;
+    }
+    .game-bar.fullscreen {
+      bottom: 15px;
+      opacity: 1;
+    }
+    .game-bar.hidden {
+      transform: translate(-50%, 40px);
+      opacity: 0.4;
+    }
+    .bar-left, .bar-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .bar-center {
+      flex: 1;
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .bar-button {
+      cursor: pointer;
+      font-size: 1.2em;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+    .bar-button:hover {
+      transform: scale(1.15);
+      color: #ffd;
+    }
     @media (max-width: 768px) {
       .label { font-size: 1.5em; top: 15px; left: 20px; }
       .button-container { top: 70px; left: 15px; right: 15px; }
       .button-container button { flex: 1 1 100%; text-align: center; }
       iframe { width: 95%; height: 85%; }
+      .pause-overlay { width: 95%; height: 85%; }
+      .game-bar { width: 90%; padding: 8px 14px; font-size: 0.9em; }
     }
   </style>
 </head>
@@ -105,19 +172,19 @@
   <div class="label">sealgod.xyz</div>
   <div class="button-container">
     <button onclick="window.open('https://node-unblocker-psi.vercel.app/')">NODE UNBLOCKER/PROXY</button>
-    <button onclick="loadGame('https://novastats.willemvisser.co.za/')">SHADOW PROXY (SERVER #1)</button>
-    <button onclick="loadGame('https://monitoring.metropolitanstaffingsolutions.com/')">SHADOW PROXY (SERVER #2)</button>
-    <button onclick="loadGame('https://duckmath.github.io/')">DUCKMATH</button>
-    <button onclick="loadGame('https://geometry-lessons.github.io/')">GEOMETRY-LESSONS</button>
-    <button onclick="loadGame('https://geometryspot.com/activities/')">GEOMETRY SPOT</button>
-    <button onclick="loadGame('https://d3rtzzzsiu7gdr.cloudfront.net/')">HYPACKEL</button>
-    <button onclick="loadGame('https://slope-slope.github.io/games/')">SLOPE-SLOPE</button>
-    <button onclick="loadGame('https://152.53.136.204.ip.addr.tools/games/')">152.53.136.204</button>
-    <button onclick="loadGame('https://algebra.icu/gxmes')">ALGEBRA GXMES</button>
-    <button onclick="loadGame('https://glacierarcade.xyz/gxmes')">GLACIER GXMES</button>
-    <button onclick="loadGame('https://8765hfjdf.vercel.app/unblockedgame76.html')">76 UNBLOCKED GAMES</button>
-    <button onclick="loadGame('https://55gms.com/g')">EXPLOIT CORNER</button>
-    <button onclick="loadGame('https://play.alphatron.games/')">ALPHATRON GAMES</button>
+    <button onclick="loadGame('https://novastats.willemvisser.co.za/', 'SHADOW PROXY (SERVER #1)')">SHADOW PROXY (SERVER #1)</button>
+    <button onclick="loadGame('https://monitoring.metropolitanstaffingsolutions.com/', 'SHADOW PROXY (SERVER #2)')">SHADOW PROXY (SERVER #2)</button>
+    <button onclick="loadGame('https://duckmath.github.io/', 'DUCKMATH')">DUCKMATH</button>
+    <button onclick="loadGame('https://geometry-lessons.github.io/', 'GEOMETRY-LESSONS')">GEOMETRY-LESSONS</button>
+    <button onclick="loadGame('https://geometryspot.com/activities/', 'GEOMETRY SPOT')">GEOMETRY SPOT</button>
+    <button onclick="loadGame('https://d3rtzzzsiu7gdr.cloudfront.net/', 'HYPACKEL')">HYPACKEL</button>
+    <button onclick="loadGame('https://slope-slope.github.io/games/', 'SLOPE-SLOPE')">SLOPE-SLOPE</button>
+    <button onclick="loadGame('https://152.53.136.204.ip.addr.tools/games/', '152.53.136.204')">152.53.136.204</button>
+    <button onclick="loadGame('https://algebra.icu/gxmes', 'ALGEBRA GXMES')">ALGEBRA GXMES</button>
+    <button onclick="loadGame('https://glacierarcade.xyz/gxmes', 'GLACIER GXMES')">GLACIER GXMES</button>
+    <button onclick="loadGame('https://8765hfjdf.vercel.app/unblockedgame76.html', '76 UNBLOCKED GAMES')">76 UNBLOCKED GAMES</button>
+    <button onclick="loadGame('https://55gms.com/g', 'EXPLOIT CORNER')">EXPLOIT CORNER</button>
+    <button onclick="loadGame('https://play.alphatron.games/', 'ALPHATRON GAMES')">ALPHATRON GAMES</button>
     <button onclick="window.open('https://node-unblocker-psi.vercel.app/proxy/https:/thewebsitesbridge.com/apps/a/19900/b.html')">ROBLOX</button>
     <button onclick="window.open('https://sites.google.com/view/classroom6x/')">CLASSROOM 6X</button>
     <button onclick="window.open('https://playhop.com/', '_blank')">PLAYHOP</button>
@@ -126,25 +193,78 @@
   </div>
   <div class="box">
     <iframe id="gameFrame" src=""></iframe>
+    <div class="pause-overlay" id="pauseOverlay">⏸</div>
+  </div>
+  <div class="game-bar" id="gameBar">
+    <div class="bar-left">
+      <span id="fpsDisplay">FPS: 0</span>
+    </div>
+    <div class="bar-center" id="gameTitle">Game Name</div>
+    <div class="bar-right">
+      <span class="bar-button" id="pauseBtn">⏸️</span>
+      <span class="bar-button" id="fullscreenBtn">⛶</span>
+    </div>
   </div>
   <footer>&copy; <span id="yr"></span> sealgod.xyz</footer>
   <script>
     const frame = document.getElementById('gameFrame');
-    function loadGame(url) {
+    const bar = document.getElementById('gameBar');
+    const titleEl = document.getElementById('gameTitle');
+    const fpsEl = document.getElementById('fpsDisplay');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    const pauseOverlay = document.getElementById('pauseOverlay');
+    let paused = false, lastFrame = performance.now(), fps = 0, hideTimer = null;
+    function loadGame(url, name) {
       if (!url) return;
-      if (frame.src === url || frame.src.endsWith(url)) {
-        frame.style.display = (frame.style.display === 'none' || frame.style.display === '') ? 'block' : 'none';
-        return;
-      }
       frame.src = url;
       frame.style.display = 'block';
+      pauseOverlay.style.display = 'none';
+      paused = false;
+      titleEl.textContent = name || 'Unknown Game';
+      bar.style.display = 'flex';
+    }
+    function updateFPS(now) {
+      const delta = now - lastFrame;
+      fps = 1000 / delta;
+      fpsEl.textContent = "FPS: " + fps.toFixed(0);
+      lastFrame = now;
+      requestAnimationFrame(updateFPS);
+    }
+    requestAnimationFrame(updateFPS);
+    pauseBtn.addEventListener('click', () => {
+      paused = !paused;
+      pauseOverlay.style.display = paused ? 'flex' : 'none';
+      frame.style.filter = paused ? 'brightness(0.3)' : 'none';
+    });
+    fullscreenBtn.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+        bar.classList.add('fullscreen');
+        setupHideBar();
+      } else {
+        document.exitFullscreen();
+        bar.classList.remove('fullscreen');
+        bar.classList.remove('hidden');
+      }
+    });
+    function setupHideBar() {
+      document.addEventListener('mousemove', resetHideTimer);
+      document.addEventListener('click', resetHideTimer);
+      resetHideTimer();
+    }
+    function resetHideTimer() {
+      bar.classList.remove('hidden');
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(() => {
+        if (document.fullscreenElement) bar.classList.add('hidden');
+      }, 3000);
     }
     (function titleCycler() {
       const CHARSET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}<>?/|~';
-      function randomChar() { return CHARSET.charAt(Math.floor(Math.random() * CHARSET.length)); }
-      function randomTitle(len = 12) { return Array.from({ length: len }, randomChar).join(''); }
-      const TITLE_LENGTH = 14;
-      const TITLE_INTERVAL = 500;
+      const randomChar = () => CHARSET.charAt(Math.floor(Math.random() * CHARSET.length));
+      const randomTitle = len => Array.from({ length: len }, randomChar).join('');
+      const TITLE_LENGTH = 14, TITLE_INTERVAL = 500;
       document.title = randomTitle(TITLE_LENGTH);
       setInterval(() => { document.title = randomTitle(TITLE_LENGTH); }, TITLE_INTERVAL);
     })();
@@ -173,6 +293,7 @@
       }
       setInterval(create, 250);
     })();
+
     document.getElementById('yr').textContent = new Date().getFullYear();
   </script>
 </body>
