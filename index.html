@@ -131,8 +131,8 @@
       position: absolute;
       bottom: 25px;
       left: 50%;
-      transform: translateX(-50%);
-      display: none;
+      transform: translateX(-50%) translateY(40px);
+      display: flex;
       align-items: center;
       justify-content: space-between;
       width: 70%;
@@ -144,15 +144,12 @@
       padding: 10px 20px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.2);
       z-index: 5;
-      transition: all 0.3s ease;
-    }
-    .game-bar.fullscreen {
-      bottom: 15px;
-      opacity: 1;
-    }
-    .game-bar.hidden {
-      transform: translate(-50%, 40px);
+      transition: transform 0.4s ease, opacity 0.4s ease;
       opacity: 0.3;
+    }
+    .game-bar.visible {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
     }
     .bar-left, .bar-right {
       display: flex;
@@ -238,6 +235,7 @@
       paused = false;
       titleEl.textContent = name || 'Unknown Game';
       bar.style.display = 'flex';
+      setupHideBar();
     }
     function updateFPS(now) {
       const delta = now - lastFrame;
@@ -249,21 +247,15 @@
     requestAnimationFrame(updateFPS);
     pauseBtn.addEventListener('click', () => {
       paused = !paused;
-      if (paused) {
-        pauseOverlay.classList.add('active');
-      } else {
-        pauseOverlay.classList.remove('active');
-      }
+      pauseOverlay.classList.toggle('active', paused);
     });
     fullscreenBtn.addEventListener('click', () => {
       if (!document.fullscreenElement) {
         frame.requestFullscreen();
         bar.classList.add('fullscreen');
-        setupHideBar();
       } else {
         document.exitFullscreen();
         bar.classList.remove('fullscreen');
-        bar.classList.remove('hidden');
       }
     });
     function setupHideBar() {
@@ -272,11 +264,11 @@
       resetHideTimer();
     }
     function resetHideTimer() {
-      bar.classList.remove('hidden');
+      bar.classList.add('visible');
       clearTimeout(hideTimer);
       hideTimer = setTimeout(() => {
-        if (document.fullscreenElement) bar.classList.add('hidden');
-      }, 1000);
+        bar.classList.remove('visible');
+      }, 1500);
     }
     (function snow() {
       function create() {
