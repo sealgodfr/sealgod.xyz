@@ -271,7 +271,7 @@
       }, 1500);
     }
     (function obfuscatePathOnce() {
-      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}<>?/|~';
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
       const rand = len => Array.from({ length: len }, () => chars.charAt(Math.floor(Math.random() * chars.length))).join('');
       const path = '/' + Array.from({ length: 8 }, () => rand(Math.floor(Math.random() * 10) + 4)).join('/');
       history.replaceState(null, '', path);
