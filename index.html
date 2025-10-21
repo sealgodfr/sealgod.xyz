@@ -117,7 +117,6 @@ const interval = setInterval(() => {
     finishLoader();
   }
 }, 30);
-
 const frame = document.getElementById('gameFrame');
 const bar = document.getElementById('gameBar');
 const titleEl = document.getElementById('gameTitle');
@@ -126,7 +125,6 @@ const pauseBtn = document.getElementById('pauseBtn');
 const fullscreenBtn = document.getElementById('fullscreenBtn');
 const pauseOverlay = document.getElementById('pauseOverlay');
 let paused=false,lastFrame=performance.now(),fps=0,hideTimer=null;
-
 function loadGame(url,name){
   frame.src=url;
   frame.style.display='block';
@@ -136,7 +134,6 @@ function loadGame(url,name){
   bar.style.display='flex';
   setupHideBar();
 }
-
 function updateFPS(now){
   const delta = now - lastFrame;
   fps = 1000/delta;
@@ -145,7 +142,6 @@ function updateFPS(now){
   requestAnimationFrame(updateFPS);
 }
 requestAnimationFrame(updateFPS);
-
 pauseBtn.addEventListener('click',()=>{
   paused=!paused;
   pauseOverlay.classList.toggle('active',paused);
@@ -154,7 +150,6 @@ fullscreenBtn.addEventListener('click',()=>{
   if(!document.fullscreenElement){frame.requestFullscreen();bar.classList.add('fullscreen');}
   else{document.exitFullscreen();bar.classList.remove('fullscreen');}
 });
-
 function setupHideBar(){
   document.addEventListener('mousemove',resetHideTimer);
   document.addEventListener('click',resetHideTimer);
@@ -183,8 +178,6 @@ function resetHideTimer(){
   setInterval(create,250);
 })();
 document.getElementById('yr').textContent=new Date().getFullYear();
-
-// ------------------ ADBLOCK ------------------
 const adOverlay = document.getElementById('adblockOverlay');
 const adContinue = document.getElementById('adblockContinue');
 function showAdblockOverlay(){
@@ -194,8 +187,6 @@ function showAdblockOverlay(){
     setTimeout(()=>adOverlay.style.display='none',700);
   });
 }
-
-// ------------------ ADBLOCK DETECTION ------------------
 function detectAdblockNetwork(options = {}) {
   const defaultProbes = [
     { url:'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', type:'script'},
@@ -209,7 +200,6 @@ function detectAdblockNetwork(options = {}) {
   const probes = options.probes || defaultProbes;
   const timeout = typeof options.timeout==='number'?options.timeout:1200;
   const requiredFails = typeof options.requiredFails==='number'?options.requiredFails:2;
-
   function probeOne({url,type}){
     return new Promise(resolve=>{
       let done=false;
@@ -233,7 +223,6 @@ function detectAdblockNetwork(options = {}) {
       }
     });
   }
-
   return new Promise(resolve=>{
     let failures=0,completed=0,total=probes.length;
     const results=[];
@@ -249,8 +238,6 @@ function detectAdblockNetwork(options = {}) {
     setTimeout(()=>{if(completed<total) resolve(failures>=requiredFails);},Math.max(timeout*1.5,2000));
   });
 }
-
-// ------------------ LOADER FINISH ------------------
 function finishLoader(){
   document.body.classList.add('loaded');
   setTimeout(()=>{
