@@ -3,21 +3,102 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title><3 c</title>
+<title><3 d</title>
 <style>
-html, body {height:100%;margin:0;padding:0;overflow:hidden;font-family:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;color:#222;background:linear-gradient(135deg,#b993d6,#8ca6db,#a0d8ef,#c6a0f6);background-size:400% 400%;animation:gradientMove 18s ease infinite;}
-@keyframes gradientMove{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
-#loadingScreen{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#0b0f1a,#001f4d,#000814,#00193d);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:100;animation:gradientMove 15s ease infinite;}
-#loadingScreen h1{color:#00f0ff;font-size:3em;margin:0 0 50px 0;text-shadow:0 0 10px #00f0ff,0 0 20px #00f0ff,0 0 40px #00f0ff;opacity:0;transform:translateY(-20px);animation:fadeInUp 1s forwards 0.3s;}
-@keyframes fadeInUp{to{opacity:1;transform:translateY(0);}}
-#loadingBarContainer{position:relative;width:60%;height:20px;background:rgba(0,0,0,0.2);border-radius:10px;overflow:hidden;margin-bottom:20px;}
-#loadingBar{width:0%;height:100%;background:#00f0ff;border-radius:10px;position:relative;overflow:hidden;}
-.spark{position:absolute;width:5px;height:20px;background:#00ffff;top:0;border-radius:50%;opacity:0.8;box-shadow:0 0 15px #00ffff,0 0 30px #00ffff;animation:sparkAnim 1s linear infinite;}
-@keyframes sparkAnim{0%{transform:translateX(0) scale(0.5);opacity:1;}100%{transform:translateX(100%) scale(0);opacity:0;}}
-body.loaded #loadingScreen{animation:scrollDown 1s forwards cubic-bezier(0.4,0,0.2,1);}
-@keyframes scrollDown{0%{transform:translateY(0);}100%{transform:translateY(120%);opacity:0;}}
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
+  color: #222;
+  background: linear-gradient(135deg, #b993d6, #8ca6db, #a0d8ef, #c6a0f6);
+  background-size: 400% 400%;
+  animation: gradientMove 18s ease infinite;
+}
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+#loadingScreen {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, #0b0f1a, #001f4d, #000814, #00193d);
+  background-size: 400% 400%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  animation: gradientMove 15s ease infinite;
+  box-shadow: 0 0 60px #00f0ff inset;
+}
+#loadingScreen h1 {
+  color: #00f0ff;
+  font-size: 3em;
+  margin: 0 0 50px 0;
+  text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff, 0 0 40px #00f0ff;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeInUp 1s forwards 0.3s;
+}
+#loadingBarContainer {
+  position: relative;
+  width: 60%;
+  height: 20px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 0 20px #00f0ff inset;
+}
+#loadingBar {
+  width: 0%;
+  height: 100%;
+  background: #00f0ff;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #00f0ff, 0 0 40px #00f0ff inset;
+  position: relative;
+  overflow: hidden;
+}
+.spark {
+  position: absolute;
+  width: 5px;
+  height: 20px;
+  background: #00ffff;
+  top: 0;
+  border-radius: 50%;
+  opacity: 0.8;
+  box-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff;
+  animation: sparkAnim 1s linear infinite;
+}
+@keyframes sparkAnim {
+  0% { transform: translateX(0) scale(0.5); opacity: 1; }
+  100% { transform: translateX(100%) scale(0); opacity: 0; }
+}
+#loadingScreen p {
+  color: #00f0ff;
+  font-size: 1em;
+  text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s forwards 2s, glowPulse 2s infinite alternate;
+}
+@keyframes fadeInUp { to { opacity:1; transform:translateY(0); } }
+@keyframes glowPulse {
+  0% { text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff; }
+  50% { text-shadow: 0 0 20px #00f0ff, 0 0 40px #00ffff; }
+  100% { text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff; }
+}
+body.loaded #loadingScreen {
+  animation: scrollDown 1s forwards cubic-bezier(0.4,0,0.2,1);
+}
+@keyframes scrollDown { 0% { transform: translateY(0); } 100% { transform: translateY(120%); opacity: 0; } }
 .label{position:absolute;top:25px;left:30px;font-size:2.2em;font-weight:700;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,0.3);letter-spacing:1px;z-index:20;}
-.button-container{position:absolute;top:90px;left:30px;right:30px;display:flex;flex-wrap:wrap;gap:12px;z-index:10;}
+.button-container{position:absolute;top:90px;left:30px;right:30px;display:flex;flex-wrap:wrap;gap:12px;z-index:10;justify-content:flex-start;}
 .button-container button{background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.25);border-radius:12px;padding:10px 18px;font-size:0.95em;letter-spacing:0.5px;backdrop-filter:blur(8px);cursor:pointer;transition:all 0.25s ease;}
 .button-container button:hover{background:rgba(255,255,255,0.3);transform:translateY(-3px);}
 .box{position:absolute;top:150px;left:0;width:100%;height:calc(100% - 160px);display:flex;justify-content:center;align-items:center;}
@@ -31,10 +112,33 @@ footer{position:absolute;bottom:12px;width:100%;text-align:center;color:rgba(255
 .bar-center{flex:1;text-align:center;font-weight:600;letter-spacing:0.5px;}
 .bar-button{cursor:pointer;font-size:1.2em;transition:transform 0.2s ease,color 0.2s ease;}
 .bar-button:hover{transform:scale(1.15);color:#ffd;}
-#adblockOverlay{position:fixed;top:0;left:0;width:100%;height:100%;display:flex;justify-content:center;align-items:center;background:linear-gradient(-45deg,#ff0000,#8b0000,#ff0000,#8b0000);background-size:400% 400%;animation:adblockGradient 8s ease infinite;z-index:200;opacity:0;pointer-events:none;transition:opacity 0.7s ease;}
+#adblockOverlay {
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  display:flex;justify-content:center;align-items:center;
+  background:linear-gradient(-45deg,#ff0000,#8b0000,#ff0000,#8b0000);
+  background-size:400% 400%;
+  animation: adblockGradient 8s ease infinite;
+  z-index:200;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.7s ease;
+}
+@keyframes adblockGradient {
+  0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}
+}
 #adblockOverlay.show{opacity:1;pointer-events:all;}
-@keyframes adblockGradient{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
-#adblockBox{background:rgba(0,0,0,0.85);border:2px solid #ff4444;border-radius:20px;width:50%;max-width:700px;min-height:350px;display:flex;flex-direction:column;padding:30px;color:#fff;font-family:"Inter",sans-serif;box-shadow:0 0 30px #ff0000 inset;transform:translateY(-120%);transition:transform 0.7s ease;}
+#adblockOverlay.hide{opacity:0;pointer-events:none;}
+#adblockBox{
+  background:rgba(0,0,0,0.85);
+  border:2px solid #ff4444;
+  border-radius:20px;
+  width:50%;max-width:700px;min-height:350px;
+  display:flex;flex-direction:column;padding:30px;color:#fff;
+  font-family:"Inter",sans-serif;
+  box-shadow:0 0 30px #ff0000 inset;
+  transform:translateY(-120%);
+  transition:transform 0.7s ease;
+}
 #adblockOverlay.show #adblockBox{transform:translateY(0);}
 #adblockOverlay.hide #adblockBox{transform:translateY(-120%);}
 #adblockTitle{font-size:2em;font-weight:bold;color:#ffaaaa;}
@@ -52,8 +156,25 @@ footer{position:absolute;bottom:12px;width:100%;text-align:center;color:rgba(255
 </div>
 <div class="label">sealgod.xyz</div>
 <div class="button-container">
+  <button onclick="window.open('https://node-unblocker-psi.vercel.app/')">NODE UNBLOCKER/PROXY</button>
   <button onclick="loadGame('https://novastats.willemvisser.co.za/', 'SHADOW PROXY (SERVER #1)')">SHADOW PROXY (SERVER #1)</button>
   <button onclick="loadGame('https://monitoring.metropolitanstaffingsolutions.com/', 'SHADOW PROXY (SERVER #2)')">SHADOW PROXY (SERVER #2)</button>
+  <button onclick="loadGame('https://duckmath.github.io/', 'DUCKMATH')">DUCKMATH</button>
+  <button onclick="loadGame('https://geometry-lessons.github.io/', 'GEOMETRY-LESSONS')">GEOMETRY-LESSONS</button>
+  <button onclick="loadGame('https://geometryspot.com/activities/', 'GEOMETRY SPOT')">GEOMETRY SPOT</button>
+  <button onclick="loadGame('https://d3rtzzzsiu7gdr.cloudfront.net/', 'HYPACKEL')">HYPACKEL</button>
+  <button onclick="loadGame('https://slope-slope.github.io/games/', 'SLOPE-SLOPE')">SLOPE-SLOPE</button>
+  <button onclick="loadGame('https://152.53.136.204.ip.addr.tools/games/', '152.53.136.204')">152.53.136.204</button>
+  <button onclick="loadGame('https://algebra.icu/gxmes', 'ALGEBRA GXMES')">ALGEBRA GXMES</button>
+  <button onclick="loadGame('https://glacierarcade.xyz/gxmes', 'GLACIER GXMES')">GLACIER GXMES</button>
+  <button onclick="loadGame('https://8765hfjdf.vercel.app/unblockedgame76.html', '76 UNBLOCKED GAMES')">76 UNBLOCKED GAMES</button>
+  <button onclick="loadGame('https://55gms.com/g', 'EXPLOIT CORNER')">EXPLOIT CORNER</button>
+  <button onclick="loadGame('https://play.alphatron.games/', 'ALPHATRON GAMES')">ALPHATRON GAMES</button>
+  <button onclick="window.open('https://doctoraux.com/')">ROBLOX</button>
+  <button onclick="window.open('https://sites.google.com/view/classroom6x/')">CLASSROOM 6X</button>
+  <button onclick="window.open('https://playhop.com/', '_blank')">PLAYHOP</button>
+  <button onclick="window.open('https://now.gg/', '_blank')">NOW.GG (SERVER #1)</button>
+  <button onclick="window.open('https://thewebsitesbridge.com/', '_blank')">NOW.GG (SERVER #2)</button>
 </div>
 <div class="box">
   <iframe id="gameFrame"></iframe>
@@ -72,64 +193,121 @@ footer{position:absolute;bottom:12px;width:100%;text-align:center;color:rgba(255
   <div id="adblockBox">
     <div id="adblockTitle">WARNING</div>
     <div id="adblockText">
-      We have detected you potentially using an adblocker. Using an adblocker in this website could lead to some games/proxies not working. It is recommended you disable your adblocker to prevent any issues with any games. If you believe this is an error or do not care, continue.
+      We have detected you potentially using an adblocker. Using an adblocker on this website could lead to some games/proxies not working properly. It is recommended you disable your adblocker to prevent any issues with any games. If you believe this is an error or do not care, continue.
     </div>
     <div id="adblockContinue">Continue</div>
   </div>
 </div>
 <script>
-const loadingScreen=document.getElementById('loadingScreen');
-const loadingBar=document.getElementById('loadingBar');
-for(let i=0;i<20;i++){const spark=document.createElement('div');spark.className='spark';spark.style.animationDelay=(Math.random()*2)+'s';spark.style.top=Math.random()*100+'%';loadingBar.appendChild(spark);}
-let progress=0;const interval=setInterval(()=>{progress+=1;loadingBar.style.width=progress+'%';if(progress>=100){clearInterval(interval);finishLoader();}},30);
-const frame=document.getElementById('gameFrame');const bar=document.getElementById('gameBar');const titleEl=document.getElementById('gameTitle');const fpsEl=document.getElementById('fpsDisplay');const pauseBtn=document.getElementById('pauseBtn');const fullscreenBtn=document.getElementById('fullscreenBtn');const pauseOverlay=document.getElementById('pauseOverlay');let paused=false,lastFrame=performance.now(),fps=0,hideTimer=null;
-function loadGame(url,name){frame.src=url;frame.style.display='block';pauseOverlay.classList.remove('active');paused=false;titleEl.textContent=name||'Unknown (?)';bar.style.display='flex';setupHideBar();}
-function updateFPS(now){const delta=now-lastFrame;fps=1000/delta;fpsEl.textContent="FPS: "+fps.toFixed(0);lastFrame=now;requestAnimationFrame(updateFPS);}
+const loadingScreen = document.getElementById('loadingScreen');
+const loadingBar = document.getElementById('loadingBar');
+for(let i=0;i<20;i++){
+  const spark = document.createElement('div');
+  spark.className = 'spark';
+  spark.style.animationDelay = (Math.random()*2)+'s';
+  spark.style.top = Math.random()*100+'%';
+  loadingBar.appendChild(spark);
+}
+let progress = 0;
+const interval = setInterval(() => {
+  progress += 1;
+  loadingBar.style.width = progress+'%';
+  if(progress>=100){
+    clearInterval(interval);
+    finishLoader();
+  }
+}, 30);
+const frame = document.getElementById('gameFrame');
+const bar = document.getElementById('gameBar');
+const titleEl = document.getElementById('gameTitle');
+const fpsEl = document.getElementById('fpsDisplay');
+const pauseBtn = document.getElementById('pauseBtn');
+const fullscreenBtn = document.getElementById('fullscreenBtn');
+const pauseOverlay = document.getElementById('pauseOverlay');
+let paused=false,lastFrame=performance.now(),fps=0,hideTimer=null;
+function loadGame(url,name){
+  frame.src = url;
+  frame.style.display='block';
+  pauseOverlay.classList.remove('active');
+  paused=false;
+  titleEl.textContent=name||'Unknown (?)';
+  bar.style.display='flex';
+  setupHideBar();
+}
+function updateFPS(now){
+  const delta = now-lastFrame;
+  fps = 1000/delta;
+  fpsEl.textContent = "FPS: "+fps.toFixed(0);
+  lastFrame=now;
+  requestAnimationFrame(updateFPS);
+}
 requestAnimationFrame(updateFPS);
 pauseBtn.addEventListener('click',()=>{paused=!paused;pauseOverlay.classList.toggle('active',paused);});
-fullscreenBtn.addEventListener('click',()=>{if(!document.fullscreenElement){frame.requestFullscreen();bar.classList.add('fullscreen');}else{document.exitFullscreen();bar.classList.remove('fullscreen');}});
-function setupHideBar(){document.addEventListener('mousemove',resetHideTimer);document.addEventListener('click',resetHideTimer);resetHideTimer();}
-function resetHideTimer(){bar.classList.add('visible');clearTimeout(hideTimer);hideTimer=setTimeout(()=>{bar.classList.remove('visible');},1500);}
+fullscreenBtn.addEventListener('click',()=>{
+  if(!document.fullscreenElement){frame.requestFullscreen();bar.classList.add('fullscreen');}
+  else{document.exitFullscreen();bar.classList.remove('fullscreen');}
+});
+function setupHideBar(){
+  document.addEventListener('mousemove',resetHideTimer);
+  document.addEventListener('click',resetHideTimer);
+  resetHideTimer();
+}
+function resetHideTimer(){
+  bar.classList.add('visible');
+  clearTimeout(hideTimer);
+  hideTimer=setTimeout(()=>{bar.classList.remove('visible');},1500);
+}
 document.getElementById('yr').textContent=new Date().getFullYear();
+(function snow(){
+  function create(){
+    const el = document.createElement('div');
+    el.className='snowflake';
+    el.textContent='❄';
+    el.style.fontSize=(Math.random()*1.3+0.5)+'em';
+    el.style.left=Math.random()*window.innerWidth+'px';
+    const dur=Math.random()*5000+5000;
+    el.style.transition=`transform ${dur}ms linear, opacity ${dur}ms linear`;
+    document.body.appendChild(el);
+    const driftX=Math.random()*200-100;
+    requestAnimationFrame(()=>{el.style.transform=`translate(${driftX}px, ${window.innerHeight+60}px)`;el.style.opacity='0';});
+    setTimeout(()=>el.remove(),dur+200);
+  }
+  setInterval(create,250);
+})();
 const adOverlay = document.getElementById('adblockOverlay');
 const adContinue = document.getElementById('adblockContinue');
-function showAdblockOverlay() {
+function showAdblockOverlay(){
+  adOverlay.style.display='flex';
   adOverlay.classList.add('show');
   adOverlay.classList.remove('hide');
-
-  adContinue.addEventListener('click', () => {
+  adContinue.addEventListener('click',()=>{
     adOverlay.classList.add('hide');
-    setTimeout(() => {
-      adOverlay.style.display = 'none';
-    }, 700);
+    adOverlay.classList.remove('show');
+    setTimeout(()=>{adOverlay.style.display='none';},700);
   });
 }
-function detectAdblock() {
-  return new Promise((resolve) => {
+function detectAdblock(){
+  return new Promise((resolve)=>{
     const bait = document.createElement('div');
-    bait.className = 'adsbygoogle ad-banner ad-container';
-    bait.style.width = '1px';
-    bait.style.height = '1px';
-    bait.style.position = 'absolute';
-    bait.style.left = '-9999px';
+    bait.className='adsbygoogle ad-banner ad-container';
+    bait.style.width='1px';bait.style.height='1px';
+    bait.style.position='absolute';bait.style.left='-9999px';
     document.body.appendChild(bait);
-    setTimeout(() => {
-      const blocked = !document.body.contains(bait) || bait.offsetParent === null || bait.clientHeight === 0;
+    setTimeout(()=>{
+      const blocked=!document.body.contains(bait)||bait.offsetParent===null||bait.clientHeight===0;
       bait.remove();
       resolve(blocked);
-    }, 100);
+    },100);
   });
 }
-function finishLoader() {
+function finishLoader(){
   document.body.classList.add('loaded');
-  setTimeout(() => {
-    loadingScreen.style.display = 'none';
-    detectAdblock().then((blocked) => {
-      if (blocked) {
-        showAdblockOverlay();
-      }
+  setTimeout(()=>{
+    loadingScreen.style.display='none';
+    detectAdblock().then(blocked=>{
+      if(blocked) showAdblockOverlay();
     });
-  }, 1200);
+  },1200);
 }
 </script>
 </body>
