@@ -6,6 +6,7 @@
 <title><3</title>
 <base id="site-base" href="/" />
 <style>
+/* ------------------ GENERAL ------------------ */
 html, body {
   height: 100%;
   margin: 0;
@@ -22,6 +23,8 @@ html, body {
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+
+/* ------------------ LOADING ------------------ */
 #loadingScreen {
   position: fixed;
   top: 0; left: 0;
@@ -91,6 +94,8 @@ html, body {
 @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
 body.loaded #loadingScreen { animation: scrollDown 1s forwards cubic-bezier(0.4, 0, 0.2, 1); }
 @keyframes scrollDown { 0% { transform: translateY(0); } 100% { transform: translateY(120%); opacity: 0; } }
+
+/* ------------------ UI ------------------ */
 .label {
   position: absolute;
   top: 25px;
@@ -206,7 +211,7 @@ footer {
   justify-content: space-between;
   width: 70%;
   max-width: 900px;
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 20px;
   backdrop-filter: blur(10px);
   color: white;
@@ -335,6 +340,7 @@ const pauseBtn = document.getElementById('pauseBtn');
 const fullscreenBtn = document.getElementById('fullscreenBtn');
 const pauseOverlay = document.getElementById('pauseOverlay');
 let paused = false, lastFrame = performance.now(), fps = 0, hideTimer = null;
+
 function loadGame(url, name) {
   frame.src = url;
   frame.style.display = 'block';
@@ -397,36 +403,37 @@ function resetHideTimer() {
   setInterval(create, 250);
 })();
 document.getElementById('yr').textContent = new Date().getFullYear();
-function detectAdblock(callback){
-  const bait = document.createElement('div');
-  bait.className = 'adsbox';
-  bait.style.height='1px';
-  bait.style.width='1px';
-  bait.style.position='absolute';
-  bait.style.top='-1000px';
-  document.body.appendChild(bait);
-  setTimeout(()=>{
-    const blocked = !bait.offsetParent || bait.offsetHeight === 0;
-    document.body.removeChild(bait);
-    callback(blocked);
-  },150);
-}
+const adOverlay = document.getElementById('adblockOverlay');
+const adContinue = document.getElementById('adblockContinue');
 function showAdblockOverlay(){
-  const overlay = document.getElementById('adblockOverlay');
-  overlay.classList.add('show');
-  const continueBtn = document.getElementById('adblockContinue');
-  continueBtn.addEventListener('click', ()=>{
-    overlay.classList.add('slideOut');
-    setTimeout(()=>overlay.style.display='none',700);
+  adOverlay.classList.add('show');
+  adContinue.addEventListener('click', ()=>{
+    adOverlay.classList.add('slideOut');
+    setTimeout(()=>adOverlay.style.display='none',700);
   });
+}
+function setupAdblockDetection(){
+  const bait = document.createElement('div');
+  bait.className = 'adsbygoogle';
+  bait.style.width = '1px';
+  bait.style.height = '1px';
+  bait.style.position = 'absolute';
+  bait.style.left = '-9999px';
+  document.body.appendChild(bait);
+
+  const interval = setInterval(()=>{
+    if(!document.body.contains(bait)){
+      clearInterval(interval);
+      showAdblockOverlay();
+    }
+  },200);
+  setTimeout(()=>clearInterval(interval),10000);
 }
 function finishLoader(){
   document.body.classList.add('loaded');
   setTimeout(()=>{
     loadingScreen.style.display='none';
-    detectAdblock(blocked=>{
-      if(blocked) showAdblockOverlay();
-    });
+    setupAdblockDetection();
   },1200);
 }
 </script>
