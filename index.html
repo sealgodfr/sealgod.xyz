@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title><3 d</title>
+<title><3</title>
 <style>
 html, body {
   height: 100%;
@@ -258,22 +258,6 @@ function resetHideTimer(){
   hideTimer=setTimeout(()=>{bar.classList.remove('visible');},1500);
 }
 document.getElementById('yr').textContent=new Date().getFullYear();
-(function snow(){
-  function create(){
-    const el = document.createElement('div');
-    el.className='snowflake';
-    el.textContent='❄';
-    el.style.fontSize=(Math.random()*1.3+0.5)+'em';
-    el.style.left=Math.random()*window.innerWidth+'px';
-    const dur=Math.random()*5000+5000;
-    el.style.transition=`transform ${dur}ms linear, opacity ${dur}ms linear`;
-    document.body.appendChild(el);
-    const driftX=Math.random()*200-100;
-    requestAnimationFrame(()=>{el.style.transform=`translate(${driftX}px, ${window.innerHeight+60}px)`;el.style.opacity='0';});
-    setTimeout(()=>el.remove(),dur+200);
-  }
-  setInterval(create,250);
-})();
 const adOverlay = document.getElementById('adblockOverlay');
 const adContinue = document.getElementById('adblockContinue');
 function showAdblockOverlay(){
