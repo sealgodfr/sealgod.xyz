@@ -303,7 +303,7 @@ footer {
   <div id="adblockBox">
     <div id="adblockTitle">WARNING</div>
     <div id="adblockMessage">
-      We have detected you potentially using an adblocker. Using an adblocker on this website could lead to some games/proxies not working. It is recommended you disable your adblocker to prevent any issues with any games. If you believe this is an error or do not care, continue.
+      We have detected you potentially using an adblocker. Using an adblocker in this website could lead to some games/proxies not working. It is recommended you disable your adblocker to prevent any issues with any games. If you believe this is an error or do not care, continue.
     </div>
     <div id="adblockContinue">Continue</div>
   </div>
@@ -400,32 +400,34 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 function detectAdblock(callback){
   const bait = document.createElement('div');
   bait.className = 'adsbox';
-  bait.style.height = '1px';
-  bait.style.position = 'absolute';
+  bait.style.height='1px';
+  bait.style.width='1px';
+  bait.style.position='absolute';
+  bait.style.top='-1000px';
   document.body.appendChild(bait);
-  setTimeout(() => {
-    const blocked = !bait.offsetHeight || getComputedStyle(bait).display === 'none';
+  setTimeout(()=>{
+    const blocked = !bait.offsetParent || bait.offsetHeight === 0;
     document.body.removeChild(bait);
     callback(blocked);
-  }, 50);
+  },150);
 }
 function showAdblockOverlay(){
   const overlay = document.getElementById('adblockOverlay');
   overlay.classList.add('show');
   const continueBtn = document.getElementById('adblockContinue');
-  continueBtn.addEventListener('click', () => {
+  continueBtn.addEventListener('click', ()=>{
     overlay.classList.add('slideOut');
-    setTimeout(() => overlay.style.display='none', 700);
+    setTimeout(()=>overlay.style.display='none',700);
   });
 }
 function finishLoader(){
   document.body.classList.add('loaded');
-  setTimeout(() => {
-    loadingScreen.style.display = 'none';
-    detectAdblock(blocked => {
+  setTimeout(()=>{
+    loadingScreen.style.display='none';
+    detectAdblock(blocked=>{
       if(blocked) showAdblockOverlay();
     });
-  }, 1200);
+  },1200);
 }
 </script>
 </body>
