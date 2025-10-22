@@ -4,17 +4,6 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title><3</title>
-<meta property="og:title" content="sealgod.xyz - Online Games + Free Proxies" />
-<meta property="og:description" content="sealgod.xyz - Website Developed by @sealgod.xyz, Mainly Designed for Kids at School to Play Games Easily." />
-<meta property="og:image" content="https://tse1.mm.bing.net/th/id/OIP.gYoxieJMypWGDNMBHu7nLwHaFL?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" />
-<meta property="og:url" content="https://sealgod.xyz" />
-<meta name="theme-color" content="#00f0ff" />
-<meta name="twitter:card" content="a" />
-<meta name="twitter:title" content="sealgod.xyz - Online Games + Free Proxies" />
-<meta name="twitter:description" content="sealgod.xyz - Website Developed by @sealgod.xyz, Mainly Designed for Kids at School to Play Games Easily." />
-<meta name="twitter:image" content="https://tse1.mm.bing.net/th/id/OIP.gYoxieJMypWGDNMBHu7nLwHaFL?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" />
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
 <style>
 html, body {
   height: 100%;
@@ -157,13 +146,6 @@ footer{position:absolute;bottom:12px;width:100%;text-align:center;color:rgba(255
 #adblockContinue{align-self:flex-end;background:#000;color:#fff;padding:10px 20px;border-radius:10px;cursor:pointer;transition:all 0.25s ease;margin-top:20px;font-weight:bold;}
 #adblockContinue:hover{background:linear-gradient(135deg,#ff0000,#8b0000);animation:shake 0.5s infinite;}
 @keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-5px);}50%{transform:translateX(5px);}75%{transform:translateX(-5px);}}
-.button-container.scrollable {
-  position: relative;
-  max-height: 40vh;
-  overflow-y: auto;
-  backdrop-filter: blur(6px);
-  padding-right: 8px;
-}
 </style>
 </head>
 <body>
@@ -251,7 +233,6 @@ function loadGame(url,name){
   titleEl.textContent=name||'Unknown (?)';
   bar.style.display='flex';
   setupHideBar();
-  watchOverlap();
 }
 function updateFPS(now){
   const delta = now-lastFrame;
@@ -262,32 +243,55 @@ function updateFPS(now){
 }
 requestAnimationFrame(updateFPS);
 pauseBtn.addEventListener('click',()=>{paused=!paused;pauseOverlay.classList.toggle('active',paused);});
-fullscreenBtn.addEventListener('click',()=>{if(!document.fullscreenElement){frame.requestFullscreen();bar.classList.add('fullscreen');}else{document.exitFullscreen();bar.classList.remove('fullscreen');}});
-function setupHideBar(){document.addEventListener('mousemove',resetHideTimer);document.addEventListener('click',resetHideTimer);resetHideTimer();}
-function resetHideTimer(){bar.classList.add('visible');clearTimeout(hideTimer);hideTimer=setTimeout(()=>{bar.classList.remove('visible');},1500);}
-document.getElementById('yr').textContent=new Date().getFullYear();
-const adOverlay=document.getElementById('adblockOverlay');
-const adContinue=document.getElementById('adblockContinue');
-function showAdblockOverlay(){adOverlay.style.display='flex';adOverlay.classList.add('show');adOverlay.classList.remove('hide');adContinue.addEventListener('click',()=>{adOverlay.classList.add('hide');adOverlay.classList.remove('show');setTimeout(()=>{adOverlay.style.display='none';},700);});}
-function detectAdblock(){return new Promise((resolve)=>{const bait=document.createElement('div');bait.className='adsbygoogle ad-banner ad-container';bait.style.width='1px';bait.style.height='1px';bait.style.position='absolute';bait.style.left='-9999px';document.body.appendChild(bait);setTimeout(()=>{const blocked=!document.body.contains(bait)||bait.offsetParent===null||bait.clientHeight===0;bait.remove();resolve(blocked);},100);});}
-function finishLoader(){document.body.classList.add('loaded');setTimeout(()=>{loadingScreen.style.display='none';detectAdblock().then(blocked=>{if(blocked) showAdblockOverlay();});},1200);}
-const buttonContainer=document.querySelector('.button-container');
-function checkButtonOverlap(){
-  const iframeRect=frame.getBoundingClientRect();
-  const buttonsRect=buttonContainer.getBoundingClientRect();
-  const isOverlapping=!(
-    iframeRect.top>buttonsRect.bottom||
-    iframeRect.bottom<buttonsRect.top||
-    iframeRect.left>buttonsRect.right||
-    iframeRect.right<buttonsRect.left
-  );
-  if(isOverlapping){buttonContainer.classList.add('scrollable');}
-  else{buttonContainer.classList.remove('scrollable');}
+fullscreenBtn.addEventListener('click',()=>{
+  if(!document.fullscreenElement){frame.requestFullscreen();bar.classList.add('fullscreen');}
+  else{document.exitFullscreen();bar.classList.remove('fullscreen');}
+});
+function setupHideBar(){
+  document.addEventListener('mousemove',resetHideTimer);
+  document.addEventListener('click',resetHideTimer);
+  resetHideTimer();
 }
-function watchOverlap(){
-  checkButtonOverlap();
-  window.addEventListener('resize',checkButtonOverlap);
-  window.addEventListener('scroll',checkButtonOverlap);
+function resetHideTimer(){
+  bar.classList.add('visible');
+  clearTimeout(hideTimer);
+  hideTimer=setTimeout(()=>{bar.classList.remove('visible');},1500);
+}
+document.getElementById('yr').textContent=new Date().getFullYear();
+const adOverlay = document.getElementById('adblockOverlay');
+const adContinue = document.getElementById('adblockContinue');
+function showAdblockOverlay(){
+  adOverlay.style.display='flex';
+  adOverlay.classList.add('show');
+  adOverlay.classList.remove('hide');
+  adContinue.addEventListener('click',()=>{
+    adOverlay.classList.add('hide');
+    adOverlay.classList.remove('show');
+    setTimeout(()=>{adOverlay.style.display='none';},700);
+  });
+}
+function detectAdblock(){
+  return new Promise((resolve)=>{
+    const bait = document.createElement('div');
+    bait.className='adsbygoogle ad-banner ad-container';
+    bait.style.width='1px';bait.style.height='1px';
+    bait.style.position='absolute';bait.style.left='-9999px';
+    document.body.appendChild(bait);
+    setTimeout(()=>{
+      const blocked=!document.body.contains(bait)||bait.offsetParent===null||bait.clientHeight===0;
+      bait.remove();
+      resolve(blocked);
+    },100);
+  });
+}
+function finishLoader(){
+  document.body.classList.add('loaded');
+  setTimeout(()=>{
+    loadingScreen.style.display='none';
+    detectAdblock().then(blocked=>{
+      if(blocked) showAdblockOverlay();
+    });
+  },1200);
 }
 </script>
 </body>
