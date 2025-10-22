@@ -3,16 +3,15 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<title><3</title>
 <title>sealgod.xyz</title>
-<meta property="og:title" content="sealgod.xyz - Games & Proxies" />
-<meta property="og:description" content="sealgod.xyz - Perfect Website to Access Online Video Games at School ⚡" />
+<meta property="og:title" content="sealgod.xyz - Free Online Games + Free Proxies" />
+<meta property="og:description" content="sealgod.xyz - Website Developed by @sealgod.xyz, Designed for Kids at School to Play Games Easily." />
 <meta property="og:image" content="https://tse1.mm.bing.net/th/id/OIP.gYoxieJMypWGDNMBHu7nLwHaFL?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" />
 <meta property="og:url" content="https://sealgod.xyz" />
 <meta name="theme-color" content="#00f0ff" />
-<meta name="twitter:card" content="a" />
-<meta name="twitter:title" content="sealgod.xyz - Games & Proxies" />
-<meta name="twitter:description" content="sealgod.xyz - Perfect Website to Access Online Video Games at School ⚡" />
-<meta name="twitter:image" content="https://tse1.mm.bing.net/th/id/OIP.gYoxieJMypWGDNMBHu7nLwHaFL?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <style>
 html, body {
   height: 100%;
@@ -31,39 +30,56 @@ html, body {
   100% { background-position: 0% 50%; }
 }
 #loadingScreen {
-  position: fixed; top: 0; left: 0;
+  position: fixed;
+  top: 0; left: 0;
   width: 100%; height: 100%;
   background: linear-gradient(135deg, #0b0f1a, #001f4d, #000814, #00193d);
   background-size: 400% 400%;
-  display: flex; flex-direction: column;
-  justify-content: center; align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   z-index: 100;
   animation: gradientMove 15s ease infinite;
   box-shadow: 0 0 60px #00f0ff inset;
 }
 #loadingScreen h1 {
-  color: #00f0ff; font-size: 3em;
+  color: #00f0ff;
+  font-size: 3em;
   margin: 0 0 50px 0;
   text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff, 0 0 40px #00f0ff;
-  opacity: 0; transform: translateY(-20px);
+  opacity: 0;
+  transform: translateY(-20px);
   animation: fadeInUp 1s forwards 0.3s;
 }
 #loadingBarContainer {
-  position: relative; width: 60%; height: 20px;
-  background: rgba(0,0,0,0.2); border-radius: 10px;
-  overflow: hidden; margin-bottom: 20px;
+  position: relative;
+  width: 60%;
+  height: 20px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
   box-shadow: 0 0 20px #00f0ff inset;
 }
 #loadingBar {
-  width: 0%; height: 100%;
-  background: #00f0ff; border-radius: 10px;
+  width: 0%;
+  height: 100%;
+  background: #00f0ff;
+  border-radius: 10px;
   box-shadow: 0 0 20px #00f0ff, 0 0 40px #00f0ff inset;
-  position: relative; overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
 .spark {
-  position: absolute; width: 5px; height: 20px;
-  background: #00ffff; top: 0; border-radius: 50%;
-  opacity: 0.8; box-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff;
+  position: absolute;
+  width: 5px;
+  height: 20px;
+  background: #00ffff;
+  top: 0;
+  border-radius: 50%;
+  opacity: 0.8;
+  box-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff;
   animation: sparkAnim 1s linear infinite;
 }
 @keyframes sparkAnim {
@@ -71,9 +87,12 @@ html, body {
   100% { transform: translateX(100%) scale(0); opacity: 0; }
 }
 #loadingScreen p {
-  color: #00f0ff; font-size: 1em;
+  color: #00f0ff;
+  font-size: 1em;
   text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff;
-  margin: 0; opacity: 0; transform: translateY(20px);
+  margin: 0;
+  opacity: 0;
+  transform: translateY(20px);
   animation: fadeInUp 1s forwards 2s, glowPulse 2s infinite alternate;
 }
 @keyframes fadeInUp { to { opacity:1; transform:translateY(0); } }
@@ -87,56 +106,9 @@ body.loaded #loadingScreen {
 }
 @keyframes scrollDown { 0% { transform: translateY(0); } 100% { transform: translateY(120%); opacity: 0; } }
 .label{position:absolute;top:25px;left:30px;font-size:2.2em;font-weight:700;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,0.3);letter-spacing:1px;z-index:20;}
-.button-container {
-  position:absolute;
-  top:90px;
-  left:30px;
-  right:30px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-  z-index:10;
-  justify-content:flex-start;
-  transition: all 0.3s ease;
-}
-.button-container button {
-  background:rgba(255,255,255,0.15);
-  color:#fff;
-  border:1px solid rgba(255,255,255,0.25);
-  border-radius:12px;
-  padding:10px 18px;
-  font-size:0.95em;
-  letter-spacing:0.5px;
-  backdrop-filter:blur(8px);
-  cursor:pointer;
-  transition:all 0.25s ease;
-}
+.button-container{position:absolute;top:90px;left:30px;right:30px;display:flex;flex-wrap:wrap;gap:12px;z-index:10;justify-content:flex-start;}
+.button-container button{background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.25);border-radius:12px;padding:10px 18px;font-size:0.95em;letter-spacing:0.5px;backdrop-filter:blur(8px);cursor:pointer;transition:all 0.25s ease;}
 .button-container button:hover{background:rgba(255,255,255,0.3);transform:translateY(-3px);}
-.button-scrollable {
-  max-height: 250px;
-  overflow-y: auto;
-  padding-right: 8px;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255,255,255,0.5) transparent;
-}
-.button-scrollable::-webkit-scrollbar { width: 8px; }
-.button-scrollable::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.4);
-  border-radius: 4px;
-}
-.button-collapsed {
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  white-space: nowrap;
-  gap: 6px;
-  padding: 10px;
-  background: rgba(0,0,0,0.4);
-  border-radius: 12px;
-  max-height: 70px;
-}
-.button-collapsed button {
-  flex: 0 0 auto;
-}
 .box{position:absolute;top:150px;left:0;width:100%;height:calc(100% - 160px);display:flex;justify-content:center;align-items:center;}
 iframe{width:88%;height:88%;border:none;border-radius:18px;background:#000;box-shadow:0 8px 30px rgba(0,0,0,0.25);display:none;position:relative;z-index:1;transition:all 0.4s ease;}
 .pause-overlay{position:absolute;width:88%;height:88%;background:rgba(0,0,0,0.55);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:3em;color:white;opacity:0;pointer-events:none;text-shadow:0 0 20px rgba(255,255,255,0.8);transition:opacity 0.4s ease;z-index:3;}
@@ -148,6 +120,47 @@ footer{position:absolute;bottom:12px;width:100%;text-align:center;color:rgba(255
 .bar-center{flex:1;text-align:center;font-weight:600;letter-spacing:0.5px;}
 .bar-button{cursor:pointer;font-size:1.2em;transition:transform 0.2s ease,color 0.2s ease;}
 .bar-button:hover{transform:scale(1.15);color:#ffd;}
+#adblockOverlay {
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  display:flex;justify-content:center;align-items:center;
+  background:linear-gradient(-45deg,#ff0000,#8b0000,#ff0000,#8b0000);
+  background-size:400% 400%;
+  animation: adblockGradient 8s ease infinite;
+  z-index:200;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.7s ease;
+}
+@keyframes adblockGradient {
+  0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}
+}
+#adblockOverlay.show{opacity:1;pointer-events:all;}
+#adblockOverlay.hide{opacity:0;pointer-events:none;}
+#adblockBox{
+  background:rgba(0,0,0,0.85);
+  border:2px solid #ff4444;
+  border-radius:20px;
+  width:50%;max-width:700px;min-height:350px;
+  display:flex;flex-direction:column;padding:30px;color:#fff;
+  font-family:"Inter",sans-serif;
+  box-shadow:0 0 30px #ff0000 inset;
+  transform:translateY(-120%);
+  transition:transform 0.7s ease;
+}
+#adblockOverlay.show #adblockBox{transform:translateY(0);}
+#adblockOverlay.hide #adblockBox{transform:translateY(-120%);}
+#adblockTitle{font-size:2em;font-weight:bold;color:#ffaaaa;}
+#adblockText{margin-top:20px;flex:1;line-height:1.5;font-size:1em;color:#fff;}
+#adblockContinue{align-self:flex-end;background:#000;color:#fff;padding:10px 20px;border-radius:10px;cursor:pointer;transition:all 0.25s ease;margin-top:20px;font-weight:bold;}
+#adblockContinue:hover{background:linear-gradient(135deg,#ff0000,#8b0000);animation:shake 0.5s infinite;}
+@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-5px);}50%{transform:translateX(5px);}75%{transform:translateX(-5px);}}
+.button-container.scrollable {
+  position: relative;
+  max-height: 40vh;
+  overflow-y: auto;
+  backdrop-filter: blur(6px);
+  padding-right: 8px;
+}
 </style>
 </head>
 <body>
@@ -157,7 +170,7 @@ footer{position:absolute;bottom:12px;width:100%;text-align:center;color:rgba(255
   <p>Developed by @sealgod.xyz - discord.gg/3gShcB35Ys</p>
 </div>
 <div class="label">sealgod.xyz</div>
-<div class="button-container" id="buttonContainer">
+<div class="button-container">
   <button onclick="window.open('https://node-unblocker-psi.vercel.app/')">NODE UNBLOCKER/PROXY</button>
   <button onclick="loadGame('https://novastats.willemvisser.co.za/', 'SHADOW PROXY (SERVER #1)')">SHADOW PROXY (SERVER #1)</button>
   <button onclick="loadGame('https://monitoring.metropolitanstaffingsolutions.com/', 'SHADOW PROXY (SERVER #2)')">SHADOW PROXY (SERVER #2)</button>
@@ -191,7 +204,34 @@ footer{position:absolute;bottom:12px;width:100%;text-align:center;color:rgba(255
   </div>
 </div>
 <footer>&copy; <span id="yr"></span> sealgod.xyz</footer>
+<div id="adblockOverlay">
+  <div id="adblockBox">
+    <div id="adblockTitle">WARNING</div>
+    <div id="adblockText">
+      We have detected a potential adblocker. Using an adblocker on this website could lead to some games/proxies not working properly. It is recommended you disable your adblocker to prevent any issues with any games. If you believe this is an error or do not care, continue. If you do continue in possession of an adblocker, you acknowledge the fact that some stuff may not work.
+    </div>
+    <div id="adblockContinue">Continue</div>
+  </div>
+</div>
 <script>
+const loadingScreen = document.getElementById('loadingScreen');
+const loadingBar = document.getElementById('loadingBar');
+for(let i=0;i<20;i++){
+  const spark = document.createElement('div');
+  spark.className = 'spark';
+  spark.style.animationDelay = (Math.random()*2)+'s';
+  spark.style.top = Math.random()*100+'%';
+  loadingBar.appendChild(spark);
+}
+let progress = 0;
+const interval = setInterval(() => {
+  progress += 1;
+  loadingBar.style.width = progress+'%';
+  if(progress>=100){
+    clearInterval(interval);
+    finishLoader();
+  }
+}, 30);
 const frame = document.getElementById('gameFrame');
 const bar = document.getElementById('gameBar');
 const titleEl = document.getElementById('gameTitle');
@@ -199,7 +239,6 @@ const fpsEl = document.getElementById('fpsDisplay');
 const pauseBtn = document.getElementById('pauseBtn');
 const fullscreenBtn = document.getElementById('fullscreenBtn');
 const pauseOverlay = document.getElementById('pauseOverlay');
-const buttonContainer = document.getElementById('buttonContainer');
 let paused=false,lastFrame=performance.now(),fps=0,hideTimer=null;
 function loadGame(url,name){
   frame.src = url;
@@ -209,12 +248,7 @@ function loadGame(url,name){
   titleEl.textContent=name||'Unknown (?)';
   bar.style.display='flex';
   setupHideBar();
-  collapseButtons(true);
-  setTimeout(checkButtonOverlap,500);
-}
-function collapseButtons(state){
-  if(state){buttonContainer.classList.add('button-collapsed');}
-  else{buttonContainer.classList.remove('button-collapsed');}
+  watchOverlap();
 }
 function updateFPS(now){
   const delta = now-lastFrame;
@@ -225,39 +259,33 @@ function updateFPS(now){
 }
 requestAnimationFrame(updateFPS);
 pauseBtn.addEventListener('click',()=>{paused=!paused;pauseOverlay.classList.toggle('active',paused);});
-fullscreenBtn.addEventListener('click',()=>{
-  if(!document.fullscreenElement){frame.requestFullscreen();bar.classList.add('fullscreen');}
-  else{document.exitFullscreen();bar.classList.remove('fullscreen');}
-});
-function setupHideBar(){
-  document.addEventListener('mousemove',resetHideTimer);
-  document.addEventListener('click',resetHideTimer);
-  resetHideTimer();
-}
-function resetHideTimer(){
-  bar.classList.add('visible');
-  clearTimeout(hideTimer);
-  hideTimer=setTimeout(()=>{bar.classList.remove('visible');},1500);
-}
+fullscreenBtn.addEventListener('click',()=>{if(!document.fullscreenElement){frame.requestFullscreen();bar.classList.add('fullscreen');}else{document.exitFullscreen();bar.classList.remove('fullscreen');}});
+function setupHideBar(){document.addEventListener('mousemove',resetHideTimer);document.addEventListener('click',resetHideTimer);resetHideTimer();}
+function resetHideTimer(){bar.classList.add('visible');clearTimeout(hideTimer);hideTimer=setTimeout(()=>{bar.classList.remove('visible');},1500);}
 document.getElementById('yr').textContent=new Date().getFullYear();
+const adOverlay=document.getElementById('adblockOverlay');
+const adContinue=document.getElementById('adblockContinue');
+function showAdblockOverlay(){adOverlay.style.display='flex';adOverlay.classList.add('show');adOverlay.classList.remove('hide');adContinue.addEventListener('click',()=>{adOverlay.classList.add('hide');adOverlay.classList.remove('show');setTimeout(()=>{adOverlay.style.display='none';},700);});}
+function detectAdblock(){return new Promise((resolve)=>{const bait=document.createElement('div');bait.className='adsbygoogle ad-banner ad-container';bait.style.width='1px';bait.style.height='1px';bait.style.position='absolute';bait.style.left='-9999px';document.body.appendChild(bait);setTimeout(()=>{const blocked=!document.body.contains(bait)||bait.offsetParent===null||bait.clientHeight===0;bait.remove();resolve(blocked);},100);});}
+function finishLoader(){document.body.classList.add('loaded');setTimeout(()=>{loadingScreen.style.display='none';detectAdblock().then(blocked=>{if(blocked) showAdblockOverlay();});},1200);}
+const buttonContainer=document.querySelector('.button-container');
 function checkButtonOverlap(){
-  const buttonsRect = buttonContainer.getBoundingClientRect();
-  const iframeRect = frame.getBoundingClientRect();
-  if (frame.style.display !== 'none') {
-    const overlap = !(
-      buttonsRect.bottom < iframeRect.top ||
-      buttonsRect.top > iframeRect.bottom ||
-      buttonsRect.right < iframeRect.left ||
-      buttonsRect.left > iframeRect.right
-    );
-    if (overlap) buttonContainer.classList.add('button-scrollable');
-    else buttonContainer.classList.remove('button-scrollable');
-  } else {
-    buttonContainer.classList.remove('button-scrollable');
-  }
+  const iframeRect=frame.getBoundingClientRect();
+  const buttonsRect=buttonContainer.getBoundingClientRect();
+  const isOverlapping=!(
+    iframeRect.top>buttonsRect.bottom||
+    iframeRect.bottom<buttonsRect.top||
+    iframeRect.left>buttonsRect.right||
+    iframeRect.right<buttonsRect.left
+  );
+  if(isOverlapping){buttonContainer.classList.add('scrollable');}
+  else{buttonContainer.classList.remove('scrollable');}
 }
-window.addEventListener('resize', checkButtonOverlap);
-window.addEventListener('scroll', checkButtonOverlap);
+function watchOverlap(){
+  checkButtonOverlap();
+  window.addEventListener('resize',checkButtonOverlap);
+  window.addEventListener('scroll',checkButtonOverlap);
+}
 </script>
 </body>
 </html>
