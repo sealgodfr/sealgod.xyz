@@ -86,9 +86,7 @@ body.loaded #loadingScreen {
   animation: scrollDown 1s forwards cubic-bezier(0.4,0,0.2,1);
 }
 @keyframes scrollDown { 0% { transform: translateY(0); } 100% { transform: translateY(120%); opacity: 0; } }
-
 .label{position:absolute;top:25px;left:30px;font-size:2.2em;font-weight:700;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,0.3);letter-spacing:1px;z-index:20;}
-
 .button-container {
   position:absolute;
   top:90px;
@@ -114,8 +112,6 @@ body.loaded #loadingScreen {
   transition:all 0.25s ease;
 }
 .button-container button:hover{background:rgba(255,255,255,0.3);transform:translateY(-3px);}
-
-/* ✅ Scroll mode for overlapping */
 .button-scrollable {
   max-height: 250px;
   overflow-y: auto;
@@ -128,8 +124,6 @@ body.loaded #loadingScreen {
   background: rgba(255,255,255,0.4);
   border-radius: 4px;
 }
-
-/* ✅ Dropdown (collapsed) mode */
 .button-collapsed {
   flex-wrap: nowrap;
   overflow-x: auto;
@@ -143,8 +137,6 @@ body.loaded #loadingScreen {
 .button-collapsed button {
   flex: 0 0 auto;
 }
-
-/* Main layout */
 .box{position:absolute;top:150px;left:0;width:100%;height:calc(100% - 160px);display:flex;justify-content:center;align-items:center;}
 iframe{width:88%;height:88%;border:none;border-radius:18px;background:#000;box-shadow:0 8px 30px rgba(0,0,0,0.25);display:none;position:relative;z-index:1;transition:all 0.4s ease;}
 .pause-overlay{position:absolute;width:88%;height:88%;background:rgba(0,0,0,0.55);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:3em;color:white;opacity:0;pointer-events:none;text-shadow:0 0 20px rgba(255,255,255,0.8);transition:opacity 0.4s ease;z-index:3;}
@@ -164,9 +156,7 @@ footer{position:absolute;bottom:12px;width:100%;text-align:center;color:rgba(255
   <div id="loadingBarContainer"><div id="loadingBar"></div></div>
   <p>Developed by @sealgod.xyz - discord.gg/3gShcB35Ys</p>
 </div>
-
 <div class="label">sealgod.xyz</div>
-
 <div class="button-container" id="buttonContainer">
   <button onclick="window.open('https://node-unblocker-psi.vercel.app/')">NODE UNBLOCKER/PROXY</button>
   <button onclick="loadGame('https://novastats.willemvisser.co.za/', 'SHADOW PROXY (SERVER #1)')">SHADOW PROXY (SERVER #1)</button>
@@ -188,12 +178,10 @@ footer{position:absolute;bottom:12px;width:100%;text-align:center;color:rgba(255
   <button onclick="window.open('https://now.gg/', '_blank')">NOW.GG (SERVER #1)</button>
   <button onclick="window.open('https://thewebsitesbridge.com/', '_blank')">NOW.GG (SERVER #2)</button>
 </div>
-
 <div class="box">
   <iframe id="gameFrame"></iframe>
   <div class="pause-overlay" id="pauseOverlay">⏸ Paused</div>
 </div>
-
 <div class="game-bar" id="gameBar">
   <div class="bar-left"><span id="fpsDisplay">FPS: (?)</span></div>
   <div class="bar-center" id="gameTitle">Enjoy!</div>
@@ -202,9 +190,7 @@ footer{position:absolute;bottom:12px;width:100%;text-align:center;color:rgba(255
     <span class="bar-button" id="fullscreenBtn">⛶</span>
   </div>
 </div>
-
 <footer>&copy; <span id="yr"></span> sealgod.xyz</footer>
-
 <script>
 const frame = document.getElementById('gameFrame');
 const bar = document.getElementById('gameBar');
@@ -215,7 +201,6 @@ const fullscreenBtn = document.getElementById('fullscreenBtn');
 const pauseOverlay = document.getElementById('pauseOverlay');
 const buttonContainer = document.getElementById('buttonContainer');
 let paused=false,lastFrame=performance.now(),fps=0,hideTimer=null;
-
 function loadGame(url,name){
   frame.src = url;
   frame.style.display='block';
@@ -255,7 +240,6 @@ function resetHideTimer(){
   hideTimer=setTimeout(()=>{bar.classList.remove('visible');},1500);
 }
 document.getElementById('yr').textContent=new Date().getFullYear();
-
 function checkButtonOverlap(){
   const buttonsRect = buttonContainer.getBoundingClientRect();
   const iframeRect = frame.getBoundingClientRect();
