@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title><3</title>
+<title>sealgod.xyz</title>
 <style>
 html, body {
   height: 100%;
@@ -11,8 +11,8 @@ html, body {
   padding: 0;
   overflow: hidden;
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
-  color: #222;
-  background: linear-gradient(135deg, #b993d6, #8ca6db, #a0d8ef, #c6a0f6);
+  color: #fff;
+  background: linear-gradient(135deg, #0b0f1a, #001f4d, #000814, #00193d);
   background-size: 400% 400%;
   animation: gradientMove 18s ease infinite;
 }
@@ -21,6 +21,7 @@ html, body {
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+
 #loadingScreen {
   position: fixed;
   top: 0; left: 0;
@@ -48,7 +49,7 @@ html, body {
   position: relative;
   width: 60%;
   height: 20px;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.3);
   border-radius: 10px;
   overflow: hidden;
   margin-bottom: 20px;
@@ -96,56 +97,73 @@ html, body {
 body.loaded #loadingScreen {
   animation: scrollDown 1s forwards cubic-bezier(0.4,0,0.2,1);
 }
-@keyframes scrollDown { 0% { transform: translateY(0); } 100% { transform: translateY(120%); opacity: 0; } }
-.label{position:absolute;top:25px;left:30px;font-size:2.2em;font-weight:700;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,0.3);letter-spacing:1px;z-index:20;}
-.button-container{position:absolute;top:90px;left:30px;right:30px;display:flex;flex-wrap:wrap;gap:12px;z-index:10;justify-content:flex-start;}
-.button-container button{background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.25);border-radius:12px;padding:10px 18px;font-size:0.95em;letter-spacing:0.5px;backdrop-filter:blur(8px);cursor:pointer;transition:all 0.25s ease;}
-.button-container button:hover{background:rgba(255,255,255,0.3);transform:translateY(-3px);}
-.box{position:absolute;top:150px;left:0;width:100%;height:calc(100% - 160px);display:flex;justify-content:center;align-items:center;}
-iframe{width:88%;height:88%;border:none;border-radius:18px;background:#000;box-shadow:0 8px 30px rgba(0,0,0,0.25);display:none;position:relative;z-index:1;transition:all 0.4s ease;}
-.pause-overlay{position:absolute;width:88%;height:88%;background:rgba(0,0,0,0.55);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:3em;color:white;opacity:0;pointer-events:none;text-shadow:0 0 20px rgba(255,255,255,0.8);transition:opacity 0.4s ease;z-index:3;}
-.pause-overlay.active{opacity:1;pointer-events:all;}
-footer{position:absolute;bottom:12px;width:100%;text-align:center;color:rgba(255,255,255,0.75);font-size:0.9em;letter-spacing:0.3px;}
-.game-bar{position:absolute;bottom:25px;left:50%;transform:translateX(-50%) translateY(40px);display:flex;align-items:center;justify-content:space-between;width:70%;max-width:900px;background:rgba(255,255,255,0.2);border-radius:20px;backdrop-filter:blur(10px);color:white;padding:10px 20px;box-shadow:0 8px 20px rgba(0,0,0,0.2);z-index:5;transition:transform 0.4s ease,opacity 0.4s ease;opacity:0.3;}
-.game-bar.visible{transform:translateX(-50%) translateY(0);opacity:1;}
-.bar-left,.bar-right{display:flex;align-items:center;gap:15px;}
-.bar-center{flex:1;text-align:center;font-weight:600;letter-spacing:0.5px;}
-.bar-button{cursor:pointer;font-size:1.2em;transition:transform 0.2s ease,color 0.2s ease;}
-.bar-button:hover{transform:scale(1.15);color:#ffd;}
-#adblockOverlay {
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  display:flex;justify-content:center;align-items:center;
-  background:linear-gradient(-45deg,#ff0000,#8b0000,#ff0000,#8b0000);
-  background-size:400% 400%;
-  animation: adblockGradient 8s ease infinite;
-  z-index:200;
-  opacity:0;
-  pointer-events:none;
-  transition:opacity 0.7s ease;
+@keyframes scrollDown {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(120%); opacity: 0; }
 }
-@keyframes adblockGradient {
-  0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}
+.label { position: absolute; top: 20px; left: 30px; font-size: 2em; font-weight: 700; color: #00f0ff; text-shadow: 0 0 15px #00f0ff, 0 0 30px #00ffff; z-index: 20; }
+#searchBar { position: absolute; top: 80px; left: 30px; width: calc(100% - 60px); background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); border-radius: 12px; padding: 10px 15px; color: white; font-size: 1em; backdrop-filter: blur(10px); outline: none; box-shadow: 0 0 10px #00f0ff inset, 0 0 20px #00ffff; transition: all 0.3s ease; }
+#searchBar::placeholder { color: rgba(255,255,255,0.6); }
+#searchBar:focus { box-shadow: 0 0 20px #00ffff, 0 0 40px #00f0ff inset; }
+
+.button-container {
+  position: absolute;
+  top: 140px;
+  left: 30px;
+  right: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  z-index: 1; 
 }
-#adblockOverlay.show{opacity:1;pointer-events:all;}
-#adblockOverlay.hide{opacity:0;pointer-events:none;}
-#adblockBox{
-  background:rgba(0,0,0,0.85);
-  border:2px solid #ff4444;
-  border-radius:20px;
-  width:50%;max-width:700px;min-height:350px;
-  display:flex;flex-direction:column;padding:30px;color:#fff;
-  font-family:"Inter",sans-serif;
-  box-shadow:0 0 30px #ff0000 inset;
-  transform:translateY(-120%);
-  transition:transform 0.7s ease;
+.button-container button {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 12px;
+  padding: 10px 18px;
+  font-size: 0.95em;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
-#adblockOverlay.show #adblockBox{transform:translateY(0);}
-#adblockOverlay.hide #adblockBox{transform:translateY(-120%);}
-#adblockTitle{font-size:2em;font-weight:bold;color:#ffaaaa;}
-#adblockText{margin-top:20px;flex:1;line-height:1.5;font-size:1em;color:#fff;}
-#adblockContinue{align-self:flex-end;background:#000;color:#fff;padding:10px 20px;border-radius:10px;cursor:pointer;transition:all 0.25s ease;margin-top:20px;font-weight:bold;}
-#adblockContinue:hover{background:linear-gradient(135deg,#ff0000,#8b0000);animation:shake 0.5s infinite;}
-@keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-5px);}50%{transform:translateX(5px);}75%{transform:translateX(-5px);}}
+.button-container button:hover { background: rgba(255,255,255,0.3); transform: translateY(-3px); }
+.box { position: absolute; top: 200px; left: 0; width: 100%; height: calc(100% - 210px); display: flex; justify-content: center; align-items: center; }
+iframe {
+  width: 88%; height: 88%; border: none; border-radius: 18px;
+  background: #000; box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  display: none; transition: all 0.4s ease; z-index: 2;
+}
+.pause-overlay {
+  position: absolute; width: 88%; height: 88%;
+  background: rgba(0,0,0,0.55); border-radius: 18px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3em; color: white; opacity: 0; pointer-events: none;
+  text-shadow: 0 0 20px rgba(255,255,255,0.8);
+  transition: opacity 0.4s ease; z-index: 3;
+}
+.pause-overlay.active { opacity: 1; pointer-events: all; }
+.game-bar {
+  position: absolute; bottom: 25px; left: 50%;
+  transform: translateX(-50%) translateY(0);
+  display: flex; align-items: center; justify-content: space-between;
+  width: 70%; max-width: 900px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: 10px 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  z-index: 5;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  opacity: 0.8;
+}
+.game-bar.hidden { transform: translateX(-50%) translateY(80px); opacity: 0; }
+.bar-left, .bar-center, .bar-right { display: flex; align-items: center; gap: 15px; position: relative; }
+.bar-button { cursor: pointer; font-size: 1.2em; transition: transform 0.2s ease, color 0.2s ease; z-index: 0; }
+.bar-button:hover { transform: scale(1.15); color: #ffd; }
+footer { position: absolute; bottom: 12px; width: 100%; text-align: center; color: rgba(255,255,255,0.75); font-size: 0.9em; letter-spacing: 0.3px; }
 </style>
 </head>
 <body>
@@ -155,28 +173,8 @@ footer{position:absolute;bottom:12px;width:100%;text-align:center;color:rgba(255
   <p>Developed by @sealgod.xyz - discord.gg/3gShcB35Ys</p>
 </div>
 <div class="label">sealgod.xyz</div>
-<div class="button-container">
-  <button onclick="window.open('https://node-unblocker-psi.vercel.app/')">NODE PROXY</button>
-  <button onclick="loadGame('https://novastats.willemvisser.co.za/', 'SHADOW PROXY (SERVER #1)')">SHADOW PROXY (SERVER #1)</button>
-  <button onclick="loadGame('https://monitoring.metropolitanstaffingsolutions.com/', 'SHADOW PROXY (SERVER #2)')">SHADOW PROXY (SERVER #2)</button>
-  <button onclick="loadGame('https://sealgodfr.github.io/s.prxy/', 'S.PRXY)')">S.PRXY (PROXY)</button>
-  <button onclick="loadGame('https://duckmath.github.io/', 'DUCKMATH')">DUCKMATH</button>
-  <button onclick="loadGame('https://geometry-lessons.github.io/', 'GEOMETRY-LESSONS')">GEOMETRY-LESSONS</button>
-  <button onclick="loadGame('https://geometryspot.com/activities/', 'GEOMETRY SPOT')">GEOMETRY SPOT</button>
-  <button onclick="loadGame('https://d3rtzzzsiu7gdr.cloudfront.net/', 'HYPACKEL')">HYPACKEL</button>
-  <button onclick="loadGame('https://slope-slope.github.io/games/', 'SLOPE-SLOPE')">SLOPE-SLOPE</button>
-  <button onclick="loadGame('https://152.53.136.204.ip.addr.tools/games/', '152.53.136.204')">152.53.136.204</button>
-  <button onclick="loadGame('https://algebra.icu/gxmes', 'ALGEBRA GXMES')">ALGEBRA GXMES</button>
-  <button onclick="loadGame('https://glacierarcade.xyz/gxmes', 'GLACIER GXMES')">GLACIER GXMES</button>
-  <button onclick="loadGame('https://8765hfjdf.vercel.app/unblockedgame76.html', '76 UNBLOCKED GAMES')">76 UNBLOCKED GAMES</button>
-  <button onclick="loadGame('https://55gms.com/g', 'EXPLOIT CORNER')">EXPLOIT CORNER</button>
-  <button onclick="loadGame('https://play.alphatron.games/', 'ALPHATRON GAMES')">ALPHATRON GAMES</button>
-  <button onclick="window.open('https://doctoraux.com/')">ROBLOX</button>
-  <button onclick="window.open('https://sites.google.com/view/classroom6x/')">CLASSROOM 6X</button>
-  <button onclick="window.open('https://playhop.com/', '_blank')">PLAYHOP</button>
-  <button onclick="window.open('https://now.gg/', '_blank')">NOW.GG (SERVER #1)</button>
-  <button onclick="window.open('https://thewebsitesbridge.com/', '_blank')">NOW.GG (SERVER #2)</button>
-</div>
+<input type="text" id="searchBar" placeholder="Search games..." />
+<div class="button-container" id="buttonContainer"></div>
 <div class="box">
   <iframe id="gameFrame"></iframe>
   <div class="pause-overlay" id="pauseOverlay">⏸ Paused</div>
@@ -185,20 +183,12 @@ footer{position:absolute;bottom:12px;width:100%;text-align:center;color:rgba(255
   <div class="bar-left"><span id="fpsDisplay">FPS: (?)</span></div>
   <div class="bar-center" id="gameTitle">Enjoy!</div>
   <div class="bar-right">
+    <span class="bar-button" id="exitBtn">❌</span>
     <span class="bar-button" id="pauseBtn">⏸️</span>
     <span class="bar-button" id="fullscreenBtn">⛶</span>
   </div>
 </div>
 <footer>&copy; <span id="yr"></span> sealgod.xyz</footer>
-<div id="adblockOverlay">
-  <div id="adblockBox">
-    <div id="adblockTitle">WARNING</div>
-    <div id="adblockText">
-      We have detected a potential adblocker. Using an adblocker on this website could lead to some games/proxies not working properly. It is recommended you disable your adblocker to prevent any issues with any games. If you believe this is an error or do not care, continue. If you do continue in possession of an adblocker, you acknowledge the fact that some stuff may not work.
-    </div>
-    <div id="adblockContinue">Continue</div>
-  </div>
-</div>
 <script>
 const loadingScreen = document.getElementById('loadingScreen');
 const loadingBar = document.getElementById('loadingBar');
@@ -215,7 +205,8 @@ const interval = setInterval(() => {
   loadingBar.style.width = progress+'%';
   if(progress>=100){
     clearInterval(interval);
-    finishLoader();
+    document.body.classList.add('loaded');
+    setTimeout(()=>loadingScreen.style.display='none',1000);
   }
 }, 30);
 const frame = document.getElementById('gameFrame');
@@ -225,16 +216,57 @@ const fpsEl = document.getElementById('fpsDisplay');
 const pauseBtn = document.getElementById('pauseBtn');
 const fullscreenBtn = document.getElementById('fullscreenBtn');
 const pauseOverlay = document.getElementById('pauseOverlay');
+const exitBtn = document.getElementById('exitBtn');
+const searchBar = document.getElementById('searchBar');
 let paused=false,lastFrame=performance.now(),fps=0,hideTimer=null;
-function loadGame(url,name){
+const games = [
+  ['https://node-unblocker-psi.vercel.app/', 'NODE PROXY', 'tab'],
+  ['https://novastats.willemvisser.co.za/', 'SHADOW PROXY (SERVER #1)', 'iframe'],
+  ['https://monitoring.metropolitanstaffingsolutions.com/', 'SHADOW PROXY (SERVER #2)', 'iframe'],
+  ['https://sealgodfr.github.io/s.prxy/', 'S.PRXY (PROXY)', 'iframe'],
+  ['https://duckmath.github.io/', 'DUCKMATH', 'iframe'],
+  ['https://geometry-lessons.github.io/', 'GEOMETRY LESSONS', 'iframe'],
+  ['https://geometryspot.com/activities/', 'GEOMETRY SPOT', 'iframe'],
+  ['https://d3rtzzzsiu7gdr.cloudfront.net/', 'HYPACKEL', 'iframe'],
+  ['https://slope-slope.github.io/games/', 'SLOPE-SLOPE', 'iframe'],
+  ['https://algebra.icu/gxmes', 'ALGEBRA GXMES', 'iframe'],
+  ['https://glacierarcade.xyz/gxmes', 'GLACIER GXMES', 'iframe'],
+  ['https://8765hfjdf.vercel.app/unblockedgame76.html', '76 UNBLOCKED GAMES', 'iframe'],
+  ['https://55gms.com/g', 'EXPLOIT CORNER', 'iframe'],
+  ['https://play.alphatron.games/', 'ALPHATRON GAMES', 'iframe'],
+  ['https://endis.org/', 'ENDIS PORTAL', 'iframe'],
+  ['https://selenite.cc/projects.html', 'SELENITE GAMES (UNOFFICIAL)', 'iframe'],
+  ['https://funbyte.pages.dev/', 'FUNBYTE GAMES', 'iframe'],
+  ['https://sites.google.com/view/empireunblockin/games?authuser=0', 'EMPIRE UNBLOCKING GAMES', 'tab'],
+  ['https://doctoraux.com/', 'ROBLOX', 'tab'],
+  ['https://sites.google.com/view/classroom6x/', 'CLASSROOM 6X', 'tab'],
+  ['https://playhop.com/', 'PLAYHOP', 'tab'],
+  ['https://now.gg/', 'NOW.GG (SERVER #1)', 'tab'],
+  ['https://thewebsitesbridge.com/', 'NOW.GG (SERVER #2)', 'tab']
+];
+const container = document.getElementById('buttonContainer');
+function openInNewTab(url){ window.open(url,"_blank"); }
+function loadInIframe(url,name){
   frame.src = url;
   frame.style.display='block';
   pauseOverlay.classList.remove('active');
   paused=false;
-  titleEl.textContent=name||'Unknown (?)';
-  bar.style.display='flex';
-  setupHideBar();
+  titleEl.textContent=name||'Unknown';
+  bar.classList.remove('hidden');
+  resetHideTimer();
 }
+function renderGames(filter=""){
+  container.innerHTML = "";
+  games.filter(([url,name]) => name.toLowerCase().includes(filter.toLowerCase()))
+       .forEach(([url,name,mode])=>{
+    const btn = document.createElement('button');
+    btn.textContent = name;
+    btn.onclick = () => mode==="tab" ? openInNewTab(url) : loadInIframe(url,name);
+    container.appendChild(btn);
+  });
+}
+renderGames();
+searchBar.addEventListener('input',()=>renderGames(searchBar.value));
 function updateFPS(now){
   const delta = now-lastFrame;
   fps = 1000/delta;
@@ -243,57 +275,30 @@ function updateFPS(now){
   requestAnimationFrame(updateFPS);
 }
 requestAnimationFrame(updateFPS);
-pauseBtn.addEventListener('click',()=>{paused=!paused;pauseOverlay.classList.toggle('active',paused);});
-fullscreenBtn.addEventListener('click',()=>{
-  if(!document.fullscreenElement){frame.requestFullscreen();bar.classList.add('fullscreen');}
-  else{document.exitFullscreen();bar.classList.remove('fullscreen');}
+pauseBtn.addEventListener('click',()=>{
+  paused=!paused;
+  pauseOverlay.classList.toggle('active',paused);
 });
-function setupHideBar(){
-  document.addEventListener('mousemove',resetHideTimer);
-  document.addEventListener('click',resetHideTimer);
-  resetHideTimer();
-}
+fullscreenBtn.addEventListener('click',()=>{
+  if(!document.fullscreenElement) frame.requestFullscreen();
+  else document.exitFullscreen();
+});
+exitBtn.addEventListener('click',()=>{
+  frame.src='';
+  frame.style.display='none';
+  pauseOverlay.classList.remove('active');
+  paused=false;
+  titleEl.textContent='Enjoy!';
+  bar.classList.add('hidden');
+});
+document.addEventListener('mousemove', resetHideTimer);
+document.addEventListener('click', resetHideTimer);
 function resetHideTimer(){
-  bar.classList.add('visible');
+  bar.classList.remove('hidden');
   clearTimeout(hideTimer);
-  hideTimer=setTimeout(()=>{bar.classList.remove('visible');},1500);
+  hideTimer = setTimeout(()=>{ bar.classList.add('hidden'); }, 1500);
 }
 document.getElementById('yr').textContent=new Date().getFullYear();
-const adOverlay = document.getElementById('adblockOverlay');
-const adContinue = document.getElementById('adblockContinue');
-function showAdblockOverlay(){
-  adOverlay.style.display='flex';
-  adOverlay.classList.add('show');
-  adOverlay.classList.remove('hide');
-  adContinue.addEventListener('click',()=>{
-    adOverlay.classList.add('hide');
-    adOverlay.classList.remove('show');
-    setTimeout(()=>{adOverlay.style.display='none';},700);
-  });
-}
-function detectAdblock(){
-  return new Promise((resolve)=>{
-    const bait = document.createElement('div');
-    bait.className='adsbygoogle ad-banner ad-container';
-    bait.style.width='1px';bait.style.height='1px';
-    bait.style.position='absolute';bait.style.left='-9999px';
-    document.body.appendChild(bait);
-    setTimeout(()=>{
-      const blocked=!document.body.contains(bait)||bait.offsetParent===null||bait.clientHeight===0;
-      bait.remove();
-      resolve(blocked);
-    },100);
-  });
-}
-function finishLoader(){
-  document.body.classList.add('loaded');
-  setTimeout(()=>{
-    loadingScreen.style.display='none';
-    detectAdblock().then(blocked=>{
-      if(blocked) showAdblockOverlay();
-    });
-  },1200);
-}
 </script>
 </body>
 </html>
